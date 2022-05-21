@@ -1,11 +1,18 @@
-import {Stack,Typography} from "@mui/material";
+import { Stack, Typography } from "@mui/material";
+import { Route, Routes } from "react-router-dom";
+import { Header } from "./Components/Shared/Header/Header";
+import { Home } from "./Pages/Home/Home";
 
-const App = () =>{
+const App = () => {
   return (
     <Stack>
-       <Typography variant="h3" textAlign="center" fontWeight="bold">This is main component</Typography>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
     </Stack>
   );
-}
+};
 
 export default App;
