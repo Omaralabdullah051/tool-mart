@@ -7,7 +7,7 @@ export const NavTypography = ({ xs, md, flex }: TypoProps) => {
       variant="h6"
       noWrap
       component="a"
-      href="/"
+      href="#"
       sx={{
         mr: 2,
         display: { xs: `${xs}`, md: `${md}` },
@@ -20,7 +20,7 @@ export const NavTypography = ({ xs, md, flex }: TypoProps) => {
         textDecoration: "none",
       }}
     >
-      LOGO
+      tooMart
     </Typography>
   );
 };

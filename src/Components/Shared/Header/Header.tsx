@@ -1,10 +1,19 @@
-import { AppBar, Box, Toolbar, IconButton, Typography } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  FormControlLabel,
+  Switch,
+} from "@mui/material";
 import { Container, Avatar, Button, Tooltip, MenuItem } from "@mui/material";
 import { Menu } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { NavTypography } from "./NavTypography";
+import { Context } from "../../../App";
 
 export const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -25,25 +34,37 @@ export const Header = () => {
     setAnchorElUser(null);
   };
 
-  const pages = [
-    "Products",
-    "Pricing",
-    "Blog",
-    "Products",
-    "Pricing",
-    "Blog",
-    "Products",
-    "Pricing",
-    "Blog",
-  ];
+  const pages = ["Products", "Blog", "Pricing", "Review"];
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
+
+  const value = useContext(Context);
+
+  let theme;
+  if (value?.checked) theme = "dark";
+  else theme = "light";
+
+  let backgroundColor: string;
+  let color: string;
+  if (theme === "dark") {
+    backgroundColor = "#111827";
+    color = "#e11d48";
+  } else {
+    backgroundColor = "#fff";
+    color = "#000";
+  }
+
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor }} color="transparent">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <NavTypography xs="none" md="flex" flex={{ flexGrow: 0 }} />
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "flex", md: "none", backgroundColor },
+            }}
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -69,14 +90,38 @@ export const Header = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: "block", md: "none" },
+                display: {
+                  xs: "block",
+                  md: "none",
+                },
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem
+                  sx={{
+                    backgroundColor,
+                    color,
+                  }}
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                >
+                  <Typography textAlign="center" fontWeight={700}>
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
+              <FormControlLabel
+                sx={{ marginLeft: "5px", backgroundColor, color }}
+                label="Dark mode"
+                control={
+                  <Switch
+                    checked={value?.checked}
+                    onChange={value?.handleChange}
+                    size="small"
+                    color="success"
+                  />
+                }
+              />
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -91,15 +136,28 @@ export const Header = () => {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
+                color="inherit"
                 sx={{
                   my: 2,
-                  color: "white",
                   display: "block",
+                  fontWeight: 700,
                 }}
               >
                 {page}
               </Button>
             ))}
+            <FormControlLabel
+              sx={{ marginLeft: "5px" }}
+              label="Dark mode"
+              control={
+                <Switch
+                  checked={value?.checked}
+                  onChange={value?.handleChange}
+                  size="small"
+                  color="success"
+                />
+              }
+            />
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -125,7 +183,11 @@ export const Header = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  sx={{ backgroundColor, color }}
+                  key={setting}
+                  onClick={handleCloseUserMenu}
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
