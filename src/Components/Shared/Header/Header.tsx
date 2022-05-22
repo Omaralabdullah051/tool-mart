@@ -45,12 +45,15 @@ export const Header = () => {
 
   let backgroundColor: string;
   let color: string;
+  let color2: string;
   if (theme === "dark") {
     backgroundColor = "#111827";
     color = "#e11d48";
+    color2 = "#000";
   } else {
-    backgroundColor = "#fff";
+    backgroundColor = "#d6d3d1";
     color = "#000";
+    color2 = "#71717a";
   }
 
   return (
@@ -101,6 +104,9 @@ export const Header = () => {
                   sx={{
                     backgroundColor,
                     color,
+                    "&:hover": {
+                      backgroundColor: color2,
+                    },
                   }}
                   key={page}
                   onClick={handleCloseNavMenu}
@@ -184,7 +190,13 @@ export const Header = () => {
             >
               {settings.map((setting) => (
                 <MenuItem
-                  sx={{ backgroundColor, color }}
+                  sx={{
+                    backgroundColor,
+                    color,
+                    "&:hover": {
+                      backgroundColor: color2,
+                    },
+                  }}
                   key={setting}
                   onClick={handleCloseUserMenu}
                 >
