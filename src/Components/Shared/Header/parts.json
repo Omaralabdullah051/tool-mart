@@ -1,0 +1,50 @@
+[
+    {
+        "name" : "CPU",
+        "img": "https://i.postimg.cc/Jz34Q5NH/cpu.png",
+        "description": "This little chip is known as the central processing unit (CPU), and it is the brain of the computer where all data crunching and processing is done. In the old days, a CPU used to have “only one single brain” or what we call a single-core CPU. But as the wise saying goes “two heads are better than one, so smart monkeys eventually improved the design of CPUs. Even though it is one physical chip, there could multiple brains (or cores) within that chip. This is where the terms dual-core (2 processors in one chip), quad-core (4 processors), and multi-core (N processors) come from. The fundamental operation of most CPUs, regardless of the physical form they take, is to execute a sequence of stored instructions that is called a program. The instructions to be executed are kept in some kind of computer memory. Nearly all CPUs follow the fetch, decode and execute steps in their operation, which are collectively known as the instruction cycle.",
+        "minimumOrderQuantity": 30,
+        "availableQuantity": 2000,
+        "price": 79
+    },
+    {
+        "name" : "Monitor",
+        "img": "https://i.postimg.cc/C5WLcvrk/graphics.jpg",
+        "description": "A computer monitor is an output device that displays information in pictorial or text form. A monitor usually comprises a visual display, some circuitry, a casing, and a power supply. The display device in modern monitors is typically a thin film transistor liquid crystal display (TFT-LCD) with LED backlighting having replaced cold-cathode fluorescent lamp (CCFL) backlighting. Previous monitors used a cathode ray tube (CRT) and some Plasma (also called Gas-Plasma) displays. Monitors are connected to the computer via VGA, Digital Visual Interface (DVI), HDMI, DisplayPort, USB-C, low-voltage differential signaling (LVDS) or other proprietary connectors and signals. Originally, computer monitors were used for data processing while television sets were used for entertainment. From the 1980s onwards, computers (and their monitors) have been used for both data processing and entertainment, while televisions have implemented some computer functionality. The common aspect ratio of televisions, and computer monitors, has changed from 4:3 to 16:10, to 16:9.",
+        "minimumOrderQuantity": 50,
+        "availableQuantity": 10000,
+        "price": 59
+    },
+    {
+        "name" : "RAM",
+        "img": "https://i.postimg.cc/4xRxtS9T/ram.png",
+        "description": "Random-access memory (RAM; /ræm/) is a form of computer memory that can be read and changed in any order, typically used to store working data and machine code.[1][2] A random-access memory device allows data items to be read or written in almost the same amount of time irrespective of the physical location of data inside the memory, in contrast with other direct-access data storage media (such as hard disks, CD-RWs, DVD-RWs and the older magnetic tapes and drum memory), where the time required to read and write data items varies significantly depending on their physical locations on the recording medium, due to mechanical limitations such as media rotation speeds and arm movement. RAM contains multiplexing and demultiplexing circuitry, to connect the data lines to the addressed storage for reading or writing the entry. Usually more than one bit of storage is accessed by the same address, and RAM devices often have multiple data lines and are said to be 8-bit or 16-bit, etc. devices.",
+        "minimumOrderQuantity": 10,
+        "availableQuantity": 300,
+        "price": 79
+    },
+    {
+        "name" : "Motherboard",
+        "img": "https://i.postimg.cc/PrwqCjN4/motherboard.png",
+        "description": "A motherboard (also called mainboard, main circuit board, mb, mboard, backplane board, base board, system board, logic board (only in Apple PCs) or mobo) is the main printed circuit board (PCB) in general-purpose computers and other expandable systems. It holds and allows communication between many of the crucial electronic components of a system, such as the central processing unit (CPU) and memory, and provides connectors for other peripherals. Unlike a backplane, a motherboard usually contains significant sub-systems, such as the central processor, the chipset's input/output and memory controllers, interface connectors, and other components integrated for general use. Motherboard means specifically a PCB with expansion capabilities. As the name suggests, this board is often referred to as the mother of all components attached to it, which often include peripherals, interface cards, and daughterboards: sound cards, video cards, network cards, host bus adapters, TV tuner cards, IEEE 1394 cards; and a variety of other custom components.Dell Precision T3600 System Motherboard, used in professional CAD Workstations. Manufactured in 2012 Similarly, the term mainboard describes a device with a single board and no additional expansions or capability, such as controlling boards in laser printers, television sets, washing machines, mobile phones, and other embedded systems with limited expansion abilities.",
+        "minimumOrderQuantity": 8,
+        "availableQuantity": 250,
+        "price": 99
+    },
+    {
+        "name" : "Printer",
+        "img": "https://i.postimg.cc/c1jH1H1C/printer.jpg",
+        "description": "In computing, a printer is a peripheral machine which makes a persistent representation of graphics or text, usually on paper. While most output is human-readable, bar code printers are an example of an expanded use for printers. Different types of printers include 3D printers, inkjet printers, laser printers, and thermal printers.Personal printers are primarily designed to support individual users, and may be connected to only a single computer. These printers are designed for low-volume, short-turnaround print jobs, requiring minimal setup time to produce a hard copy of a given document. However, they are generally slow devices ranging from 6 to around 25 pages per minute (ppm), and the cost per page is relatively high. However, this is offset by the on-demand convenience. Some printers can print documents stored on memory cards or from digital cameras and scanners. Networked or shared printers are designed for high-volume, high-speed printing. They are usually shared by many users on a network and can print at speeds of 45 to around 100 ppm. The Xerox 9700 could achieve 120 ppm. A virtual printer is a piece of computer software whose user interface and API resembles that of a printer driver, but which is not connected with a physical computer printer. A virtual printer can be used to create a file which is an image of the data which would be printed, for archival purposes or as input to another program, for example to create a PDF or to transmit to another system or user.",
+        "minimumOrderQuantity":5,
+        "availableQuantity": 500,
+        "price": 80
+    },
+    {
+        "name" : "SSD",
+        "img": "https://i.postimg.cc/Jh17YHx6/ssd.jpg",
+        "description": "A solid-state drive (SSD) is a solid-state storage device that uses integrated circuit assemblies to store data persistently, typically using flash memory, and functioning as secondary storage in the hierarchy of computer storage. It is also sometimes called a semiconductor storage device, a solid-state device or a solid-state disk, even though SSDs lack the physical spinning disks and movable read write heads used in hard disk drives (HDDs) and floppy disks.Compared with electromechanical drives, SSDs are typically more resistant to physical shock, run silently, and have higher IOPS and lower latency. SSDs store data in semiconductor cells. As of 2019, cells can contain between 1 and 4 bits of data. SSD storage devices vary in their properties according to the number of bits stored in each cell, with single-bit cells (Single Level Cells or SLC) being generally the most reliable, durable, fast, and expensive type, compared with 2- and 3-bit cells",
+        "minimumOrderQuantity": 15,
+        "availableQuantity": 800,
+        "price": 30
+    }
+]

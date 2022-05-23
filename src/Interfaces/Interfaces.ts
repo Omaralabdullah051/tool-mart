@@ -8,3 +8,25 @@ export interface ContextTypes {
   checked: boolean;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
+
+export interface PartProps<T> {
+  part: {
+    _id: T;
+    name: T;
+    img: T;
+    description: T;
+    minimumOrderQuantity: number;
+    availableQuantity: number;
+    price: number;
+  };
+}
+
+export interface PartTypes<T> {
+  _id: T;
+  name: T;
+  img: T;
+  description: T;
+  minimumOrderQuantity: number;
+  availableQuantity: number;
+  price: number;
+}
