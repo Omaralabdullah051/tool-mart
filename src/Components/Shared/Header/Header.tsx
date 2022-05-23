@@ -1,13 +1,6 @@
-import {
-  AppBar,
-  Box,
-  Toolbar,
-  IconButton,
-  Typography,
-  FormControlLabel,
-  Switch,
-} from "@mui/material";
+import { AppBar, Box, Toolbar, Switch } from "@mui/material";
 import { Container, Avatar, Button, Tooltip, MenuItem } from "@mui/material";
+import { IconButton, Typography, FormControlLabel } from "@mui/material";
 import { Menu } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";

@@ -5,6 +5,7 @@ import { Header } from "./Components/Shared/Header/Header";
 import { ContextTypes } from "./Interfaces/Interfaces";
 import { Home } from "./Pages/Home/Home";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { Footer } from "./Components/Shared/Footer/Footer";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
           </Routes>
+          <Footer />
         </Stack>
       </Context.Provider>
     </QueryClientProvider>

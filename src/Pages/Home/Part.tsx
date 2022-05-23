@@ -26,9 +26,9 @@ export const Part = ({ part }: PartProps<string>) => {
   let color3: string;
   if (theme === "dark") {
     backgroundColor = "#111827";
-    color = "#991b1b";
+    color = "#7f1d1d";
     color2 = "#52525b";
-    color3 = "#6b7280";
+    color3 = "#737373";
   } else {
     backgroundColor = "#d6d3d1";
     color = "#1e293b";
