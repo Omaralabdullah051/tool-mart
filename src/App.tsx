@@ -6,6 +6,7 @@ import { ContextTypes } from "./Interfaces/Interfaces";
 import { Home } from "./Pages/Home/Home";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Footer } from "./Components/Shared/Footer/Footer";
+import { Register } from "./Pages/Authentication/Register";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
           <Footer />
         </Stack>
