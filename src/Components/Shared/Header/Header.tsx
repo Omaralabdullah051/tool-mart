@@ -7,8 +7,13 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { useContext, useState } from "react";
 import { NavTypography } from "./NavTypography";
 import { Context } from "../../../App";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
+import { signOut } from "firebase/auth";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
+  const [user] = useAuthState(auth);
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -27,8 +32,13 @@ export const Header = () => {
     setAnchorElUser(null);
   };
 
+  const handleLogOut = () => {
+    setAnchorElUser(null);
+    signOut(auth);
+  };
+
   const pages = ["Products", "Blog", "Pricing", "Review"];
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  const settings = ["Profile", "Account", "Dashboard"];
 
   const value = useContext(Context);
 
@@ -48,6 +58,7 @@ export const Header = () => {
     color = "#000";
     color2 = "#71717a";
   }
+  const img: any = user?.photoURL;
 
   return (
     <AppBar position="static" sx={{ backgroundColor }} color="transparent">
@@ -160,43 +171,77 @@ export const Header = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem
-                  sx={{
-                    backgroundColor,
-                    color,
-                    "&:hover": {
-                      backgroundColor: color2,
-                    },
+            {user ? (
+              <>
+                {" "}
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt="Remy Sharp" src={img} />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
                   }}
-                  key={setting}
-                  onClick={handleCloseUserMenu}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
                 >
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+                  {settings.map((setting) => (
+                    <MenuItem
+                      sx={{
+                        backgroundColor,
+                        color,
+                        "&:hover": {
+                          backgroundColor: color2,
+                        },
+                      }}
+                      key={setting}
+                      onClick={handleCloseUserMenu}
+                    >
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ))}
+                  <MenuItem
+                    sx={{
+                      backgroundColor,
+                      color,
+                      "&:hover": {
+                        backgroundColor: color2,
+                      },
+                    }}
+                    onClick={handleLogOut}
+                  >
+                    <Typography textAlign="center">Log out</Typography>
+                  </MenuItem>
+                </Menu>
+              </>
+            ) : (
+              <Button
+                onClick={handleCloseNavMenu}
+                color="inherit"
+                sx={{
+                  my: 2,
+                  display: "block",
+                  fontWeight: 700,
+                }}
+              >
+                <Link
+                  style={{ textDecoration: "none", color: color }}
+                  to="/login"
+                >
+                  Login
+                </Link>
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </Container>

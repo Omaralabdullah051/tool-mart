@@ -8,7 +8,6 @@ export const Parts = () => {
     fetch("http://localhost:5000/parts").then((res) => res.json())
   );
 
-  console.log(data);
   if (isLoading) {
     return <p>...loading</p>;
   }

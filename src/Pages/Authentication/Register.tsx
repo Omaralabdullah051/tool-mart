@@ -5,21 +5,21 @@ import {
 } from "react-firebase-hooks/auth";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../App";
 import "./input.css";
+import auth from "../../firebase.init";
 
 export const Register = () => {
-  // const [createUserWithEmailAndPassword, user, loading, error] =
-  //   useCreateUserWithEmailAndPassword(auth);
-  // const [updateProfile] = useUpdateProfile(auth);
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+  const [updateProfile] = useUpdateProfile(auth);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
     watch,
-    getValues,
   } = useForm({
     mode: "onTouched",
   });
@@ -47,9 +47,28 @@ export const Register = () => {
     color3 = "#000";
   }
 
+  if (user) {
+    console.log(user);
+    navigate("/");
+  }
+
+  const imgStorageKey = "babb3d19b4514339d479026905735a56";
   const onSubmit = async (data: any) => {
-    // await createUserWithEmailAndPassword(data.email, data.password);
-    // await updateProfile({ displayName: data.name });
+    const image = data.image[0];
+    const formData = new FormData();
+    formData.append("image", image);
+    const url = `https://api.imgbb.com/1/upload?key=${imgStorageKey}`;
+    let img;
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        img = result.data.url;
+      });
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name, photoURL: img });
     console.log(data);
   };
 
@@ -216,7 +235,21 @@ export const Register = () => {
             </Grid>
           </Grid>
         </Stack>
-        <input style={{ margin: "0px auto", marginTop: "10px" }} type="file" />
+        <input
+          style={{ margin: "10px auto", fontWeight: 700 }}
+          type="file"
+          {...register("image", {
+            required: {
+              value: true,
+              message: "image is Required",
+            },
+          })}
+        />
+        {errors.image?.type === "required" && (
+          <Typography textAlign="center" variant="body2" color="error">
+            {errors.image?.message}
+          </Typography>
+        )}
         <Typography variant="body1" textAlign="center">
           Already have an account?
           <Link

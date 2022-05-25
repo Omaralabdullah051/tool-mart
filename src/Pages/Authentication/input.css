@@ -1,4 +1,4 @@
-input:not([type=checkbox]):not([type=submit]){
+input:not([type=checkbox]):not([type=submit]):not([type=file]){
     width: 220px;
     height: 60px;
     border: none;
