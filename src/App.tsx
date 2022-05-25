@@ -9,6 +9,7 @@ import { Footer } from "./Components/Shared/Footer/Footer";
 import { Register } from "./Pages/Authentication/Register";
 import { Login } from "./Pages/Authentication/Login";
 import { Purchase } from "./Pages/Purchase/Purchase";
+import { Dashboard } from "./Pages/Dashboard/Dashboard";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/purchase/:id" element={<Purchase />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
           </Routes>

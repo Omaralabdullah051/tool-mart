@@ -10,7 +10,7 @@ import { Context } from "../../../App";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import { signOut } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const [user] = useAuthState(auth);
@@ -23,9 +23,11 @@ export const Header = () => {
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
+  const navigate = useNavigate();
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+    navigate("/dashboard");
   };
 
   const handleCloseUserMenu = () => {
@@ -114,7 +116,7 @@ export const Header = () => {
                 onClick={handleCloseNavMenu}
               >
                 <Typography textAlign="center" fontWeight={700}>
-                  purchase
+                  Dashboard
                 </Typography>
               </MenuItem>
               <FormControlLabel
@@ -146,9 +148,9 @@ export const Header = () => {
             >
               <Link
                 style={{ textDecoration: "none", color: color }}
-                to="/purchase"
+                to="/dashboard"
               >
-                purchase
+                Dashboard
               </Link>
             </Button>
             <FormControlLabel
