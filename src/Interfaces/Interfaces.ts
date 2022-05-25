@@ -41,3 +41,17 @@ export interface OrderTypes<T> {
   quantity: number;
   paid?: boolean;
 }
+
+export interface RowTypes<T> {
+  row: {
+    _id: T;
+    name: T;
+    email: T;
+    address: T;
+    phone: T;
+    toolName: T;
+    quantity: number;
+    paid?: boolean;
+  };
+  refetch: () => void;
+}

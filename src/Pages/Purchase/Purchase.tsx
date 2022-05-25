@@ -66,6 +66,7 @@ export const Purchase = () => {
       phone: data.phone,
       toolName: name,
       quantity: data.quantity,
+      paid: false,
     };
     fetch("http://localhost:5000/order/post", {
       method: "POST",
@@ -81,18 +82,12 @@ export const Purchase = () => {
           reset();
         }
         if (data.error) {
-          if (data.error.name) {
-            toast.error(data.error.name);
-          }
-          if (data.error.email) {
-            toast.error(data.error.email);
-          }
-          if (data.error.address) {
-            toast.error(data.error.address);
-          }
-          if (data.error.phone) {
-            toast.error(data.error.phone);
-          }
+          if (data.error.name) toast.error(data.error.name);
+          if (data.error.email) toast.error(data.error.email);
+          if (data.error.address) toast.error(data.error.address);
+          if (data.error.phone) toast.error(data.error.phone);
+          if (data.error.quantity) toast.error(data.error.quantity);
+          if (data.error.toolName) toast.error(data.error.toolName);
         }
       });
   };

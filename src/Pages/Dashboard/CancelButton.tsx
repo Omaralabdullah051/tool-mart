@@ -7,9 +7,11 @@ import {
   DialogActions,
 } from "@mui/material";
 import { useContext, useState } from "react";
+import { toast } from "react-toastify";
 import { Context } from "../../App";
+import { RowTypes } from "../../Interfaces/Interfaces";
 
-const CancelButton = () => {
+const CancelButton = ({ row, refetch }: RowTypes<string>) => {
   const [open, setOpen] = useState(false);
   const value = useContext(Context);
 
@@ -32,6 +34,20 @@ const CancelButton = () => {
     color2 = "#334155";
     color3 = "#000";
   }
+
+  const handleAgreeButton = (id: string) => {
+    fetch(`http://localhost:5000/order/delete?id=${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message) toast.success(data.message);
+        if (data.error) toast.error(data.error);
+        refetch();
+        setOpen(false);
+      });
+  };
+
   return (
     <>
       <Button onClick={() => setOpen(true)}>Cencel</Button>
@@ -57,7 +73,7 @@ const CancelButton = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions sx={{ bgcolor: backgroundColor }}>
-          <Button sx={{ color: "" }} onClick={() => setOpen(false)}>
+          <Button sx={{ color: "" }} onClick={() => handleAgreeButton(row._id)}>
             Yes,Cancel
           </Button>
           <Button color="error" onClick={() => setOpen(false)} autoFocus>

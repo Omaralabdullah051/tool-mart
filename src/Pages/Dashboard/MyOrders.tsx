@@ -19,7 +19,11 @@ import CancelButton from "./CancelButton";
 export const MyOrders = () => {
   const [user] = useAuthState(auth);
   const value = useContext(Context);
-  const { data: tableData, isLoading } = useQuery(["orders", user], () =>
+  const {
+    data: tableData,
+    isLoading,
+    refetch,
+  } = useQuery(["orders", user], () =>
     fetch(`http://localhost:5000/order/get?email=${user?.email}`).then((res) =>
       res.json()
     )
@@ -129,7 +133,7 @@ export const MyOrders = () => {
               {row.paid ? (
                 <Typography variant="body2">paid</Typography>
               ) : (
-                <CancelButton />
+                <CancelButton row={row} refetch={refetch} />
               )}
               <Button>Payment</Button>
             </TableCell>
