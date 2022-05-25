@@ -1,4 +1,5 @@
 import { Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 import { TypoProps } from "../../../Interfaces/Interfaces";
 
 export const NavTypography = ({ xs, md, flex }: TypoProps) => {
@@ -20,7 +21,9 @@ export const NavTypography = ({ xs, md, flex }: TypoProps) => {
         textDecoration: "none",
       }}
     >
-      tooMart
+      <Link style={{ color: "inherit", textDecoration: "none" }} to="/">
+        tooMart
+      </Link>
     </Typography>
   );
 };

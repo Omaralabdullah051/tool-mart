@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { useContext } from "react";
 import { Context } from "../../App";
+import { PaymentBox } from "./PaymentBox";
 
 export const Payment = () => {
   const { id } = useParams();
@@ -18,8 +19,7 @@ export const Payment = () => {
     return <p>...loading</p>;
   }
 
-  const { name, img, address, email, phone, price, quantity, toolName } =
-    data.result[0];
+  const { name, img, price, quantity, toolName } = data.result[0];
 
   let theme;
   if (value?.checked) theme = "dark";
@@ -73,7 +73,7 @@ export const Payment = () => {
                 fontSize: { xs: "18px", md: "23px" },
               }}
             >
-              Name: {name}
+              Hello, {name}
             </Typography>
             <Typography
               variant="body1"
@@ -83,17 +83,7 @@ export const Payment = () => {
                 fontSize: { xs: "18px", md: "23px" },
               }}
             >
-              Email: {email}
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{
-                fontWeight: 800,
-                color: color2,
-                fontSize: { xs: "18px", md: "23px" },
-              }}
-            >
-              Tool Name: {toolName}
+              Your ordered tool is {toolName}
             </Typography>
             <Typography
               variant="body1"
@@ -106,28 +96,19 @@ export const Payment = () => {
               Quantity: {quantity}
             </Typography>
             <Typography sx={{ fontWeight: 800, color }} variant="h5">
-              Total Price: ${price * quantity}
+              please pay ${price * quantity}
             </Typography>
             <Typography
+              variant="body1"
               sx={{
                 fontWeight: 800,
                 color: color2,
-                fontSize: { xs: "18px", md: "25px" },
+                fontSize: { xs: "18px", md: "23px" },
               }}
-              variant="body1"
             >
-              Addresss: {address}
+              Contact Us: omaralabdullah051@gmail.com
             </Typography>
-            <Typography
-              sx={{
-                fontWeight: 800,
-                color: color2,
-                fontSize: { xs: "18px", md: "25px" },
-              }}
-              variant="body1"
-            >
-              Phone: {phone}
-            </Typography>
+            <PaymentBox />
           </Box>
         </Grid>
       </Grid>
