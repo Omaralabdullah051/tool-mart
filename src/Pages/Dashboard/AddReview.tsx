@@ -10,6 +10,7 @@ export const AddReview = () => {
   const [user] = useAuthState(auth);
   const userName: any = user?.displayName;
   const userEmail: any = user?.email;
+  const img: any = user?.photoURL;
   const {
     register,
     handleSubmit,
@@ -50,6 +51,7 @@ export const AddReview = () => {
       name: userName,
       email: userEmail,
       comment: data.comment,
+      img: img,
       rating: value,
     };
     fetch("http://localhost:5000/review/post", {
@@ -61,11 +63,11 @@ export const AddReview = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.messsage) {
+        if (data.message) {
           toast.success(data.message);
           reset();
         }
-        if (data.error.rating) toast.error(data.error.rating);
+        if (data.error?.rating) toast.error(data.error?.rating);
       });
   };
 

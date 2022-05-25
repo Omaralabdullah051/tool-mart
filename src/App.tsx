@@ -13,6 +13,7 @@ import { Dashboard } from "./Pages/Dashboard/Dashboard";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Payment } from "./Pages/Dashboard/Payment";
+import { NotFound } from "./Pages/NotFound/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +53,7 @@ const App = () => {
             <Route path="/payment/:id" element={<Payment />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
           <ToastContainer />

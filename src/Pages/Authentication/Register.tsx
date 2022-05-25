@@ -3,16 +3,18 @@ import {
   useCreateUserWithEmailAndPassword,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../App";
 import "./input.css";
 import auth from "../../firebase.init";
+import { toast } from "react-toastify";
 
 export const Register = () => {
-  const [createUserWithEmailAndPassword, user, loading, error] =
+  const [createUserWithEmailAndPassword, user, loading, hookError] =
     useCreateUserWithEmailAndPassword(auth);
+  const [error, setError] = useState("");
   const [updateProfile] = useUpdateProfile(auth);
   const navigate = useNavigate();
   const {
@@ -47,28 +49,50 @@ export const Register = () => {
     color3 = "#000";
   }
 
-  if (user) {
-    console.log(user);
-    navigate("/");
-  }
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
-  const imgStorageKey = "babb3d19b4514339d479026905735a56";
+  useEffect(() => {
+    if (hookError) {
+      switch (hookError?.code) {
+        case "auth/invalid-email":
+          toast.error("Invalid email provided, please provide a valid email");
+          setError("Invalid email provided, please provide a valid email");
+          break;
+
+        case "auth/email-already-in-use":
+          toast.error("This email is already in used");
+          setError("This email is already in used");
+          break;
+
+        case "auth/email-already-exists":
+          toast.error("Email already exists");
+          setError("Email already exists");
+          break;
+
+        case "auth/invalid-credential":
+          toast.error(
+            "Doesn't allow creation of multiple account with the same email"
+          );
+          setError(
+            "Doesn't allow creation of multiple account with the same email"
+          );
+          break;
+
+        default:
+          toast.error(hookError?.message);
+          setError(hookError?.message);
+      }
+    }
+  }, [hookError]);
+
   const onSubmit = async (data: any) => {
-    const image = data.image[0];
-    const formData = new FormData();
-    formData.append("image", image);
-    const url = `https://api.imgbb.com/1/upload?key=${imgStorageKey}`;
-    let img;
-    fetch(url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        img = result.data.url;
-      });
+    console.log(data);
     await createUserWithEmailAndPassword(data.email, data.password);
-    await updateProfile({ displayName: data.name, photoURL: img });
+    await updateProfile({ displayName: data.name, photoURL: data.image });
     console.log(data);
   };
 
@@ -235,22 +259,29 @@ export const Register = () => {
             </Grid>
           </Grid>
         </Stack>
-        <input
-          style={{ margin: "10px auto", fontWeight: 700 }}
-          type="file"
-          {...register("image", {
-            required: {
-              value: true,
-              message: "image is Required",
-            },
-          })}
-        />
+        <Box mx="auto" mt={2}>
+          <textarea
+            style={{
+              backgroundColor,
+              color: color3,
+              height: "40px",
+              borderBottom: `2px solid ${color}`,
+            }}
+            placeholder="Your Image URL"
+            {...register("image", {
+              required: {
+                value: true,
+                message: "Image is Required",
+              },
+            })}
+          ></textarea>
+        </Box>
         {errors.image?.type === "required" && (
           <Typography textAlign="center" variant="body2" color="error">
             {errors.image?.message}
           </Typography>
         )}
-        <Typography variant="body1" textAlign="center">
+        <Typography mt={2} variant="body1" textAlign="center">
           Already have an account?
           <Link
             style={{ textDecoration: "none", marginLeft: "5px" }}
@@ -259,6 +290,13 @@ export const Register = () => {
             Please login
           </Link>
         </Typography>
+        {error ? (
+          <Typography mt={2} textAlign="center" variant="body2" color="error">
+            {error}
+          </Typography>
+        ) : (
+          ""
+        )}
         <input
           style={{
             margin: "10px auto",

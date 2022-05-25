@@ -1,8 +1,9 @@
 import { Box, Grid, Stack, Typography } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Context } from "../../App";
 import auth from "../../firebase.init";
 
@@ -12,7 +13,8 @@ export const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [signInWithEmailAndPassword, user, loading, error] =
+  const [error, setError] = useState("");
+  const [signInWithEmailAndPassword, user, loading, hookError] =
     useSignInWithEmailAndPassword(auth);
   const navigate = useNavigate();
   const value = useContext(Context);
@@ -37,13 +39,40 @@ export const Login = () => {
     color3 = "#000";
   }
 
-  if (user) {
-    navigate("/");
-  }
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   const onSubmit = async (data: any) => {
     signInWithEmailAndPassword(data.email, data.password);
   };
+
+  useEffect(() => {
+    if (hookError) {
+      switch (hookError?.code) {
+        case "auth/invalid-email":
+          toast.error("Invalid email provided, please provide a valid email");
+          setError("Invalid email provided, please provide a valid email");
+          break;
+
+        case "auth/user-not-found":
+          toast.error("User not found");
+          setError("User not found");
+          break;
+
+        case "auth/wrong-password":
+          toast.error("Wrong password");
+          setError("Wrong password");
+          break;
+
+        default:
+          toast.error(hookError?.message);
+          setError(hookError?.message);
+      }
+    }
+  }, [hookError]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -136,6 +165,13 @@ export const Login = () => {
           </Link>
         </Typography>
       </Stack>
+      {error ? (
+        <Typography mt={2} textAlign="center" variant="body2" color="error">
+          {error}
+        </Typography>
+      ) : (
+        ""
+      )}
       <input
         style={{
           margin: "10px auto",

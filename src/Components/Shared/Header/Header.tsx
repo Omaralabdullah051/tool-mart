@@ -10,7 +10,7 @@ import { Context } from "../../../App";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import { signOut } from "firebase/auth";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const [user] = useAuthState(auth);
@@ -28,6 +28,11 @@ export const Header = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
     navigate("/dashboard");
+  };
+
+  const handleNavigate = () => {
+    setAnchorElNav(null);
+    navigate("/login");
   };
 
   const handleCloseUserMenu = () => {
@@ -61,6 +66,8 @@ export const Header = () => {
     color2 = "#71717a";
   }
   const img: any = user?.photoURL;
+
+  console.log(user);
 
   return (
     <AppBar position="static" sx={{ backgroundColor }} color="transparent">
@@ -170,10 +177,9 @@ export const Header = () => {
           <Box sx={{ flexGrow: 0 }}>
             {user ? (
               <>
-                {" "}
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src={img} />
+                    <Avatar alt="" src={img} />
                   </IconButton>
                 </Tooltip>
                 <Menu
@@ -223,16 +229,11 @@ export const Header = () => {
               </>
             ) : (
               <Button
-                onClick={handleCloseNavMenu}
+                onClick={handleNavigate}
                 color="inherit"
                 sx={{ my: 2, display: "block", fontWeight: 700 }}
               >
-                <Link
-                  style={{ textDecoration: "none", color: color }}
-                  to="/login"
-                >
-                  Login
-                </Link>
+                Login
               </Button>
             )}
           </Box>

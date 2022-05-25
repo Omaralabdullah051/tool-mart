@@ -6,6 +6,7 @@ import StarIcon from "@mui/icons-material/Star";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { MyOrders } from "./MyOrders";
 import { AddReview } from "./AddReview";
+import { MyProfile } from "./MyProfile";
 
 export const Dashboard = () => {
   const [value, setValue] = useState("1");
@@ -35,7 +36,9 @@ export const Dashboard = () => {
         <TabPanel value="2">
           <AddReview />
         </TabPanel>
-        <TabPanel value="3">My Profile</TabPanel>
+        <TabPanel value="3">
+          <MyProfile />
+        </TabPanel>
       </TabContext>
     </Box>
   );
