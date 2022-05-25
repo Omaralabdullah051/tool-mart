@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Footer } from "./Components/Shared/Footer/Footer";
 import { Register } from "./Pages/Authentication/Register";
 import { Login } from "./Pages/Authentication/Login";
+import { Purchase } from "./Pages/Purchase/Purchase";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/purchase/:id" element={<Purchase />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
           </Routes>

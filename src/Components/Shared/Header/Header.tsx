@@ -103,23 +103,20 @@ export const Header = () => {
                 },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem
-                  sx={{
-                    backgroundColor,
-                    color,
-                    "&:hover": {
-                      backgroundColor: color2,
-                    },
-                  }}
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                >
-                  <Typography textAlign="center" fontWeight={700}>
-                    {page}
-                  </Typography>
-                </MenuItem>
-              ))}
+              <MenuItem
+                sx={{
+                  backgroundColor,
+                  color,
+                  "&:hover": {
+                    backgroundColor: color2,
+                  },
+                }}
+                onClick={handleCloseNavMenu}
+              >
+                <Typography textAlign="center" fontWeight={700}>
+                  purchase
+                </Typography>
+              </MenuItem>
               <FormControlLabel
                 sx={{ marginLeft: "5px", backgroundColor, color }}
                 label="Dark mode"
@@ -142,20 +139,18 @@ export const Header = () => {
               display: { xs: "none", md: "flex", justifyContent: "end" },
             }}
           >
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                color="inherit"
-                sx={{
-                  my: 2,
-                  display: "block",
-                  fontWeight: 700,
-                }}
+            <Button
+              onClick={handleCloseNavMenu}
+              color="inherit"
+              sx={{ my: 2, display: "block", fontWeight: 700 }}
+            >
+              <Link
+                style={{ textDecoration: "none", color: color }}
+                to="/purchase"
               >
-                {page}
-              </Button>
-            ))}
+                purchase
+              </Link>
+            </Button>
             <FormControlLabel
               sx={{ marginLeft: "5px" }}
               label="Dark mode"
@@ -228,11 +223,7 @@ export const Header = () => {
               <Button
                 onClick={handleCloseNavMenu}
                 color="inherit"
-                sx={{
-                  my: 2,
-                  display: "block",
-                  fontWeight: 700,
-                }}
+                sx={{ my: 2, display: "block", fontWeight: 700 }}
               >
                 <Link
                   style={{ textDecoration: "none", color: color }}

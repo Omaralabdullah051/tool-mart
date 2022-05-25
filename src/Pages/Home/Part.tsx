@@ -3,6 +3,7 @@ import { Typography, CardActions, Button } from "@mui/material";
 import { useContext } from "react";
 import { Context } from "../../App";
 import { PartProps } from "../../Interfaces/Interfaces";
+import { useNavigate } from "react-router-dom";
 
 export const Part = ({ part }: PartProps<string>) => {
   const {
@@ -35,6 +36,12 @@ export const Part = ({ part }: PartProps<string>) => {
     color2 = "#334155";
     color3 = "#6b7280";
   }
+  const navigate = useNavigate();
+
+  const handleNavigate = (id: string) => {
+    navigate(`/purchase/${id}`);
+  };
+
   return (
     <Grid item xs={12} sm={6} md={4}>
       <Box m={10}>
@@ -93,7 +100,9 @@ export const Part = ({ part }: PartProps<string>) => {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">Place Order</Button>
+            <Button onClick={() => handleNavigate(part._id)} size="small">
+              Place Order
+            </Button>
           </CardActions>
         </Card>
       </Box>
