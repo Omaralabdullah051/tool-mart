@@ -30,3 +30,14 @@ export interface PartTypes<T> {
   availableQuantity: number;
   price: number;
 }
+
+export interface OrderTypes<T> {
+  _id: T;
+  name: T;
+  email: T;
+  address: T;
+  phone: T;
+  toolName: T;
+  quantity: number;
+  paid?: boolean;
+}

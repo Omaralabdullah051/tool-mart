@@ -5,12 +5,31 @@ import {
   TableRow,
   TableCell,
   Paper,
+  Button,
+  Typography,
 } from "@mui/material";
 import { useContext } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useQuery } from "react-query";
 import { Context } from "../../App";
+import auth from "../../firebase.init";
+import { OrderTypes } from "../../Interfaces/Interfaces";
+import CancelButton from "./CancelButton";
 
 export const MyOrders = () => {
+  const [user] = useAuthState(auth);
   const value = useContext(Context);
+  const { data: tableData, isLoading } = useQuery(["orders", user], () =>
+    fetch(`http://localhost:5000/order/get?email=${user?.email}`).then((res) =>
+      res.json()
+    )
+  );
+
+  console.log(tableData);
+
+  if (isLoading) {
+    return <p>loading...</p>;
+  }
 
   let theme;
   if (value?.checked) theme = "dark";
@@ -31,6 +50,7 @@ export const MyOrders = () => {
     color2 = "#334155";
     color3 = "#000";
   }
+
   return (
     <TableContainer
       //   component={Paper}
@@ -39,34 +59,82 @@ export const MyOrders = () => {
       <Table aria-label="simple-table" stickyHeader>
         <TableHead>
           <TableRow>
-            <TableCell sx={{ bgcolor: backgroundColor, color: "inherit" }}>
-              Id
-            </TableCell>
-            <TableCell sx={{ bgcolor: backgroundColor, color: "inherit" }}>
-              First name
-            </TableCell>
-            <TableCell sx={{ bgcolor: backgroundColor, color: "inherit" }}>
-              Last name
+            <TableCell
+              sx={{
+                bgcolor: backgroundColor,
+                color: "inherit",
+                fontWeight: 800,
+              }}
+            >
+              Customer Name
             </TableCell>
             <TableCell
-              sx={{ bgcolor: backgroundColor, color: "inherit" }}
+              sx={{
+                bgcolor: backgroundColor,
+                color: "inherit",
+                fontWeight: 800,
+              }}
+            >
+              Tool Name
+            </TableCell>
+            <TableCell
+              sx={{
+                bgcolor: backgroundColor,
+                color: "inherit",
+                fontWeight: 800,
+              }}
+            >
+              Address
+            </TableCell>
+            <TableCell
+              sx={{
+                bgcolor: backgroundColor,
+                color: "inherit",
+                fontWeight: 800,
+              }}
               align="center"
             >
-              Email
+              Phone
+            </TableCell>
+            <TableCell
+              sx={{
+                bgcolor: backgroundColor,
+                color: "inherit",
+                fontWeight: 800,
+              }}
+              align="center"
+            >
+              Action
             </TableCell>
           </TableRow>
         </TableHead>
-        {/* {tableData.map((row) => (
+        {tableData.result.map((row: OrderTypes<string>) => (
           <TableRow
-            key={row.id}
+            key={row._id}
             sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
           >
-            <TableCell>{row.id}</TableCell>
-            <TableCell>{row.first_name}</TableCell>
-            <TableCell>{row.last_name}</TableCell>
-            <TableCell align="center">{row.email}</TableCell>
+            <TableCell sx={{ color: color2, fontWeight: 800 }}>
+              {row.name}
+            </TableCell>
+            <TableCell sx={{ color: color2, fontWeight: 800 }}>
+              {row.toolName}
+            </TableCell>
+            <TableCell sx={{ color: color2, fontWeight: 800 }}>
+              {row.address}
+            </TableCell>
+            <TableCell sx={{ color: color2, fontWeight: 800 }} align="center">
+              {row.phone}
+            </TableCell>
+            <TableCell sx={{ color: color2, fontWeight: 800 }} align="center">
+              {row.paid ? (
+                <Typography variant="body2">paid</Typography>
+              ) : (
+                <CancelButton />
+              )}
+              <Button>Payment</Button>
+            </TableCell>
           </TableRow>
-        ))} */}
+        ))}
       </Table>
     </TableContainer>
   );

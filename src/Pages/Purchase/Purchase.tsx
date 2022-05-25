@@ -64,6 +64,8 @@ export const Purchase = () => {
       email: userEmail,
       address: data.address,
       phone: data.phone,
+      toolName: name,
+      quantity: data.quantity,
     };
     fetch("http://localhost:5000/order/post", {
       method: "POST",
@@ -277,47 +279,77 @@ export const Purchase = () => {
               </Grid>
             </Grid>
           </Stack>
-          <Box mx="auto" mt={2}>
-            <input
-              type="number"
-              style={{
-                backgroundColor,
-                color: color3,
-                borderBottom: `2px solid ${color}`,
-              }}
-              placeholder="Quantity"
-              {...register("quantity", {
-                required: {
-                  value: true,
-                  message: "Quantity is required",
-                },
-                validate: (val: string) => {
-                  const value = parseFloat(val);
-                  if (value < minimumOrderQuantity) {
-                    return `You need to order minimun ${minimumOrderQuantity} pieces`;
-                  }
-                  if (value >= availableQuantity) {
-                    return `You need to order maximum ${availableQuantity} pieces`;
-                  }
-                },
-              })}
-            ></input>
-            {errors.quantity?.type === "required" && (
-              <Typography textAlign="center" variant="body2" color="error">
-                {errors.quantity?.message}
-              </Typography>
-            )}
-            {errors.quantity?.type === "validate" && (
-              <Typography
-                sx={{ fontSize: "12px" }}
-                textAlign="center"
-                variant="body2"
-                color="error"
-              >
-                {errors.quantity?.message}
-              </Typography>
-            )}
-          </Box>
+          <Stack direction="row" spacing={2} mx="auto">
+            <Grid
+              container
+              columnSpacing={2}
+              rowSpacing={2}
+              sx={{ textAlign: "center" }}
+            >
+              <Grid item xs={12} sm={6}>
+                <Box mt={2}>
+                  <input
+                    type="text"
+                    style={{
+                      backgroundColor,
+                      color: color3,
+                      borderBottom: `2px solid ${color}`,
+                    }}
+                    placeholder="Your Name"
+                    defaultValue={name}
+                    readOnly
+                  ></input>
+                </Box>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Box mx="auto" mt={2}>
+                  <input
+                    type="number"
+                    style={{
+                      backgroundColor,
+                      color: color3,
+                      borderBottom: `2px solid ${color}`,
+                    }}
+                    placeholder="Quantity"
+                    {...register("quantity", {
+                      required: {
+                        value: true,
+                        message: "Quantity is required",
+                      },
+                      validate: (val: string) => {
+                        const value = parseFloat(val);
+                        if (value < minimumOrderQuantity) {
+                          return `You need to order minimun ${minimumOrderQuantity} pieces`;
+                        }
+                        if (value >= availableQuantity) {
+                          return `You need to order maximum ${availableQuantity} pieces`;
+                        }
+                      },
+                    })}
+                  ></input>
+                  {errors.quantity?.type === "required" && (
+                    <Typography
+                      textAlign="center"
+                      variant="body2"
+                      color="error"
+                    >
+                      {errors.quantity?.message}
+                    </Typography>
+                  )}
+                  {errors.quantity?.type === "validate" && (
+                    <Typography
+                      sx={{ fontSize: "12px" }}
+                      textAlign="center"
+                      variant="body2"
+                      color="error"
+                    >
+                      {errors.quantity?.message}
+                    </Typography>
+                  )}
+                </Box>
+              </Grid>
+            </Grid>
+          </Stack>
           <input
             style={{
               margin: "10px auto",
