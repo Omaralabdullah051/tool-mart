@@ -50,7 +50,7 @@ const CancelButton = ({ row, refetch }: RowTypes<string>) => {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)}>Cencel</Button>
+      <Button onClick={() => setOpen(true)}>Cancel</Button>
       <Dialog
         open={open}
         onClose={() => setOpen(false)}

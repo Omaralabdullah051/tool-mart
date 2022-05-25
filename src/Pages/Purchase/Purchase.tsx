@@ -67,6 +67,8 @@ export const Purchase = () => {
       toolName: name,
       quantity: data.quantity,
       paid: false,
+      img: img,
+      price: price,
     };
     fetch("http://localhost:5000/order/post", {
       method: "POST",

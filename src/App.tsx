@@ -12,6 +12,7 @@ import { Purchase } from "./Pages/Purchase/Purchase";
 import { Dashboard } from "./Pages/Dashboard/Dashboard";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Payment } from "./Pages/Dashboard/Payment";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => {
             <Route path="/home" element={<Home />} />
             <Route path="/purchase/:id" element={<Purchase />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/payment/:id" element={<Payment />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
           </Routes>

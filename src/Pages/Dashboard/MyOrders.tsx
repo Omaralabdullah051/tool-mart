@@ -11,6 +11,7 @@ import {
 import { useContext } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
 import auth from "../../firebase.init";
 import { OrderTypes } from "../../Interfaces/Interfaces";
@@ -18,6 +19,7 @@ import CancelButton from "./CancelButton";
 
 export const MyOrders = () => {
   const [user] = useAuthState(auth);
+  const navigate = useNavigate();
   const value = useContext(Context);
   const {
     data: tableData,
@@ -54,6 +56,10 @@ export const MyOrders = () => {
     color2 = "#334155";
     color3 = "#000";
   }
+
+  const handleNavigate = (id: string) => {
+    navigate(`/payment/${id}`);
+  };
 
   return (
     <TableContainer
@@ -135,7 +141,7 @@ export const MyOrders = () => {
               ) : (
                 <CancelButton row={row} refetch={refetch} />
               )}
-              <Button>Payment</Button>
+              <Button onClick={() => handleNavigate(row._id)}>Payment</Button>
             </TableCell>
           </TableRow>
         ))}
