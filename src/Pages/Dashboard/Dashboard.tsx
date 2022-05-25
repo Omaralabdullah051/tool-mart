@@ -4,6 +4,7 @@ import { useState } from "react";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import StarIcon from "@mui/icons-material/Star";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import { MyOrders } from "./MyOrders";
 
 export const Dashboard = () => {
   const [value, setValue] = useState("1");
@@ -18,7 +19,7 @@ export const Dashboard = () => {
           <TabList
             aria-label="Tabs example"
             onChange={handleChange}
-            textColor="secondary"
+            textColor="inherit"
             indicatorColor="secondary"
             centered
           >
@@ -27,7 +28,9 @@ export const Dashboard = () => {
             <Tab label="My Profile" value="3" icon={<AccountBoxIcon />} />
           </TabList>
         </Box>
-        <TabPanel value="1">My Orders</TabPanel>
+        <TabPanel value="1">
+          <MyOrders />
+        </TabPanel>
         <TabPanel value="2">Add Review</TabPanel>
         <TabPanel value="3">My Profile</TabPanel>
       </TabContext>

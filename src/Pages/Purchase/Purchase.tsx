@@ -4,6 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Context } from "../../App";
 import auth from "../../firebase.init";
 
@@ -58,7 +59,40 @@ export const Purchase = () => {
 
   const onSubmit = (data: any) => {
     console.log(data);
-    reset();
+    const orders = {
+      name: userName,
+      email: userEmail,
+      address: data.address,
+      phone: data.phone,
+    };
+    fetch("http://localhost:5000/order/post", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(orders),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message) {
+          toast.success(data.message);
+          reset();
+        }
+        if (data.error) {
+          if (data.error.name) {
+            toast.error(data.error.name);
+          }
+          if (data.error.email) {
+            toast.error(data.error.email);
+          }
+          if (data.error.address) {
+            toast.error(data.error.address);
+          }
+          if (data.error.phone) {
+            toast.error(data.error.phone);
+          }
+        }
+      });
   };
 
   return (

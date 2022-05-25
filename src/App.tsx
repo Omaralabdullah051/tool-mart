@@ -10,6 +10,8 @@ import { Register } from "./Pages/Authentication/Register";
 import { Login } from "./Pages/Authentication/Login";
 import { Purchase } from "./Pages/Purchase/Purchase";
 import { Dashboard } from "./Pages/Dashboard/Dashboard";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +52,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
           </Routes>
           <Footer />
+          <ToastContainer />
         </Stack>
       </Context.Provider>
     </QueryClientProvider>
