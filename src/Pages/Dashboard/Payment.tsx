@@ -21,6 +21,8 @@ export const Payment = () => {
 
   const { name, img, price, quantity, toolName } = data.result[0];
 
+  const totalPrice = price * quantity;
+
   let theme;
   if (value?.checked) theme = "dark";
   else theme = "light";
@@ -108,7 +110,7 @@ export const Payment = () => {
             >
               Contact Us: omaralabdullah051@gmail.com
             </Typography>
-            <PaymentBox />
+            <PaymentBox price={totalPrice} />
           </Box>
         </Grid>
       </Grid>
