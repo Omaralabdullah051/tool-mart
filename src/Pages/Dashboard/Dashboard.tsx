@@ -13,6 +13,7 @@ import useAdmin from "../../hooks/useAdmin";
 import { ManageAllOrders } from "./ManageAllOrders";
 import { AddProduct } from "./AddProduct";
 import { ManageProducts } from "./ManageProducts";
+import { MakeAdmin } from "./MakeAdmin";
 
 export const Dashboard = () => {
   const [user] = useAuthState(auth);
@@ -84,7 +85,9 @@ export const Dashboard = () => {
             <TabPanel value="2">
               <AddProduct />
             </TabPanel>
-            <TabPanel value="3">hello</TabPanel>
+            <TabPanel value="3">
+              <MakeAdmin />
+            </TabPanel>
             <TabPanel value="4">
               <ManageProducts />
             </TabPanel>

@@ -11,44 +11,33 @@ import {
 import { signOut } from "firebase/auth";
 import { useContext, useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
 import auth from "../../firebase.init";
 import { OrderTypes, PartTypes } from "../../Interfaces/Interfaces";
 import CancelButton from "./CancelButton";
-import DeleteButton from "./DeleteButton";
 
-export const ManageProducts = () => {
-  const [tableData, setTableData] = useState([]);
+export const MakeAdmin = () => {
   const navigate = useNavigate();
   const value = useContext(Context);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch("http://localhost:5000/parts", {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        });
-        const data = await res.json();
-        if (
-          data.message === "Forbidden access" ||
-          data.message === "UnAuthorized access"
-        ) {
-          signOut(auth);
-          navigate("/login");
-        }
-        if (data.message === "Success") {
-          setTableData(data.result);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, [navigate]);
+  const {
+    data: tableData,
+    isLoading,
+    refetch,
+  } = useQuery("getallusers", () =>
+    fetch(`http://localhost:5000/user/getall`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        "Content-type": "application/json",
+      },
+    }).then((res) => res.json())
+  );
 
-  console.log(tableData);
+  if (isLoading) {
+    return <p>...loading</p>;
+  }
 
   let theme;
   if (value?.checked) theme = "dark";
@@ -70,11 +59,11 @@ export const ManageProducts = () => {
     color3 = "#000";
   }
 
-  const handleUpdateStatus = (id: string) => {
-    const status = { status: "Shipped" };
+  const handleMakeAdmin = (email: string | undefined) => {
+    const status = { role: "admin" };
     (async () => {
       try {
-        const res = await fetch(`http://localhost:5000/order/put?id=${id}`, {
+        const res = await fetch(`http://localhost:5000/user/put/${email}`, {
           method: "PUT",
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -92,17 +81,15 @@ export const ManageProducts = () => {
         }
         console.log(data);
         if (data.message === "Success") {
-          const newArray = [];
-          const rest = tableData.filter(
-            (row: OrderTypes<string>) => row._id !== id
-          );
-          setTableData(data.result);
+          refetch();
         }
+        refetch();
       } catch (err) {
         console.log(err);
       }
     })();
   };
+  console.log(tableData);
 
   return (
     <TableContainer>
@@ -126,7 +113,7 @@ export const ManageProducts = () => {
                 fontWeight: 800,
               }}
             >
-              Product Name
+              User Name
             </TableCell>
             <TableCell
               sx={{
@@ -135,7 +122,7 @@ export const ManageProducts = () => {
                 fontWeight: 800,
               }}
             >
-              Product Price
+              User Email
             </TableCell>
             <TableCell
               sx={{
@@ -144,16 +131,7 @@ export const ManageProducts = () => {
                 fontWeight: 800,
               }}
             >
-              Minimum Order Quantity
-            </TableCell>
-            <TableCell
-              sx={{
-                bgcolor: backgroundColor,
-                color: "inherit",
-                fontWeight: 800,
-              }}
-            >
-              Available Quantity
+              Role
             </TableCell>
             <TableCell
               sx={{
@@ -167,7 +145,7 @@ export const ManageProducts = () => {
             </TableCell>
           </TableRow>
         </TableHead>
-        {tableData.map((row: PartTypes<string>) => (
+        {tableData.result.map((row: PartTypes<string>) => (
           <TableRow
             key={row._id}
             sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -182,20 +160,20 @@ export const ManageProducts = () => {
               {row.name}
             </TableCell>
             <TableCell sx={{ color: color2, fontWeight: 800 }}>
-              {row.price}
+              {row.email}
             </TableCell>
             <TableCell sx={{ color: color2, fontWeight: 800 }}>
-              {row.minimumOrderQuantity}
+              {!row.role ? "User" : "Admin"}
             </TableCell>
-            <TableCell sx={{ color: color2, fontWeight: 800 }}>
-              {row.availableQuantity}
-            </TableCell>
+
             <TableCell sx={{ color: color2, fontWeight: 800 }} align="center">
-              <DeleteButton
-                row={row}
-                setTableData={setTableData}
-                tableData={tableData}
-              />
+              {!row.role ? (
+                <Button onClick={() => handleMakeAdmin(row.email)}>
+                  Make Admin
+                </Button>
+              ) : (
+                ""
+              )}
             </TableCell>
           </TableRow>
         ))}

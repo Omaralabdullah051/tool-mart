@@ -20,7 +20,7 @@ export const Login = () => {
     useSignInWithEmailAndPassword(auth);
   const navigate = useNavigate();
   const value = useContext(Context);
-  const [token] = useToken(user?.user?.email);
+  const [token] = useToken(user);
   const location = useLocation();
   const from = (location.state as LocationState)?.from || "/";
 

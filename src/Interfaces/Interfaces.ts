@@ -29,6 +29,8 @@ export interface PartTypes<T> {
   minimumOrderQuantity: number;
   availableQuantity: number;
   price: number;
+  email?: T;
+  role?: T;
 }
 
 export interface OrderTypes<T> {

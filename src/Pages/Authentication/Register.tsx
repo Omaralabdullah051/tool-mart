@@ -17,7 +17,7 @@ export const Register = () => {
   const [createUserWithEmailAndPassword, user, loading, hookError] =
     useCreateUserWithEmailAndPassword(auth);
   const [error, setError] = useState("");
-  const [token] = useToken(user?.user?.email);
+  const [token] = useToken(user);
   const [updateProfile] = useUpdateProfile(auth);
   const navigate = useNavigate();
   const {

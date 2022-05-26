@@ -1,17 +1,24 @@
 import { useEffect, useState } from "react";
 
-export const useToken = (email: string | null | undefined) => {
+export const useToken = (user: any) => {
   const [token, setToken] = useState("");
 
   useEffect(() => {
-    const user = { email: email };
+    const email = user?.user?.email;
+    const img = user?.user?.photoURL;
+    const name = user?.user?.displayName;
+    const userInfo = {
+      email,
+      img,
+      name,
+    };
     if (email) {
       fetch(`http://localhost:5000/user/add/${email}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify(user),
+        body: JSON.stringify(userInfo),
       })
         .then((res) => res.json())
         .then((data) => {
@@ -21,7 +28,7 @@ export const useToken = (email: string | null | undefined) => {
           setToken(accessToken);
         });
     }
-  }, [email]);
+  }, [user]);
 
   return [token];
 };
