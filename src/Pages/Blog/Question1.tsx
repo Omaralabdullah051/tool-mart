@@ -28,7 +28,12 @@ export const Question1 = () => {
     <Box mt={3}>
       <Typography
         textAlign="center"
-        sx={{ fontSize: { xs: "15px", md: "23px" }, color, fontWeight: 800 }}
+        sx={{
+          fontSize: { xs: "15px", md: "23px" },
+          padding: { xs: "15px", md: "30px" },
+          color,
+          fontWeight: 800,
+        }}
       >
         How will we improve the performance of a React Application?
       </Typography>
@@ -39,7 +44,7 @@ export const Question1 = () => {
           fontSize: { xs: "8px", md: "18px" },
           color: color2,
           fontWeight: 800,
-          padding: { xs: "10px", md: "30px" },
+          padding: { xs: "15px", md: "30px" },
           textAlign: "justify   ",
         }}
       >
