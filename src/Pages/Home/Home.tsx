@@ -1,4 +1,5 @@
 import { Stack } from "@mui/material";
+import { AboutSection } from "./AboutSection";
 import { Banner } from "./Banner";
 import { BusinessSummary } from "./BusinessSummary";
 import { Parts } from "./Parts";
@@ -13,6 +14,7 @@ export const Home = () => {
       <BusinessSummary />
       <Review />
       <TimeLine />
+      <AboutSection />
     </Stack>
   );
 };

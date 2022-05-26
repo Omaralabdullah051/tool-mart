@@ -16,6 +16,7 @@ import { Payment } from "./Pages/Dashboard/Payment";
 import { NotFound } from "./Pages/NotFound/NotFound";
 import { RequireAuth } from "./Components/Shared/RequireAuth/RequireAuth";
 import { MyPortfolio } from "./Pages/MyPortfolio/MyPortfolio";
+import { Blog } from "./Pages/Blog/Blog";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +52,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/portfolio" element={<MyPortfolio />} />
+            <Route path="/blogs" element={<Blog />} />
             <Route path="/purchase/:id" element={<Purchase />} />
             <Route
               path="/dashboard"

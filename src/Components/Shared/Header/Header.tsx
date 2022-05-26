@@ -48,6 +48,11 @@ export const Header = () => {
     setAnchorElUser(null);
   };
 
+  const handleNavigateBlog = () => {
+    setAnchorElNav(null);
+    navigate("/blogs");
+  };
+
   const handleLogOut = () => {
     setAnchorElUser(null);
     signOut(auth);
@@ -127,12 +132,30 @@ export const Header = () => {
                     backgroundColor: color2,
                   },
                 }}
-                onClick={handleNavigateDashboard}
+                onClick={handleNavigateBlog}
               >
                 <Typography textAlign="center" fontWeight={700}>
-                  Dashboard
+                  Blog
                 </Typography>
               </MenuItem>
+              {user ? (
+                <MenuItem
+                  sx={{
+                    backgroundColor,
+                    color,
+                    "&:hover": {
+                      backgroundColor: color2,
+                    },
+                  }}
+                  onClick={handleNavigateDashboard}
+                >
+                  <Typography textAlign="center" fontWeight={700}>
+                    Dashboard
+                  </Typography>
+                </MenuItem>
+              ) : (
+                ""
+              )}
               <MenuItem
                 sx={{
                   backgroundColor,
@@ -169,6 +192,18 @@ export const Header = () => {
               display: { xs: "none", md: "flex", justifyContent: "end" },
             }}
           >
+            <Button
+              onClick={handleCloseNavMenu}
+              color="inherit"
+              sx={{ my: 2, display: "block", fontWeight: 700 }}
+            >
+              <Link
+                style={{ textDecoration: "none", color: color }}
+                to="/blogs"
+              >
+                Blog
+              </Link>
+            </Button>
             {user ? (
               <Button
                 onClick={handleCloseNavMenu}
