@@ -105,7 +105,7 @@ export const ManageAllOrders = () => {
   };
 
   return (
-    <TableContainer sx={{ maxHeight: "300px" }}>
+    <TableContainer>
       <Table aria-label="simple-table" stickyHeader>
         <TableHead>
           <TableRow>

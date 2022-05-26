@@ -47,13 +47,18 @@ export interface RowTypes<T> {
   row: {
     _id: T;
     name: T;
-    email: T;
-    address: T;
-    phone: T;
-    toolName: T;
-    quantity: number;
+    email?: T;
+    address?: T;
+    phone?: T;
+    toolName?: T;
+    quantity?: number;
     paid?: boolean;
     status?: T;
+    img?: T;
+    description?: T;
+    minimumOrderQuantity?: number;
+    availableQuantity?: number;
+    price?: number;
   };
   tableData: OrderTypes<T>[];
   setTableData: any;

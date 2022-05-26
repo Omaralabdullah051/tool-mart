@@ -12,6 +12,7 @@ import auth from "../../firebase.init";
 import useAdmin from "../../hooks/useAdmin";
 import { ManageAllOrders } from "./ManageAllOrders";
 import { AddProduct } from "./AddProduct";
+import { ManageProducts } from "./ManageProducts";
 
 export const Dashboard = () => {
   const [user] = useAuthState(auth);
@@ -51,7 +52,12 @@ export const Dashboard = () => {
                 />
                 <Tab label="Add Product" value="2" icon={<StarIcon />} />
                 <Tab label="Make Admin" value="3" icon={<AccountBoxIcon />} />
-                <Tab label="My Profile" value="4" icon={<AccountBoxIcon />} />
+                <Tab
+                  label="Manage products"
+                  value="4"
+                  icon={<AccountBoxIcon />}
+                />
+                <Tab label="My Profile" value="5" icon={<AccountBoxIcon />} />
               </TabList>
             ) : (
               ""
@@ -78,7 +84,11 @@ export const Dashboard = () => {
             <TabPanel value="2">
               <AddProduct />
             </TabPanel>
-            <TabPanel value="3">
+            <TabPanel value="3">hello</TabPanel>
+            <TabPanel value="4">
+              <ManageProducts />
+            </TabPanel>
+            <TabPanel value="5">
               <MyProfile />
             </TabPanel>
           </Box>

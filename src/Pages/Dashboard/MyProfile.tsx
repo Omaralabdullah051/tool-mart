@@ -54,7 +54,11 @@ export const MyProfile = () => {
         </Typography>
         <Typography
           mx="auto"
-          sx={{ fontWeight: 800, fontSize: { xs: "15px", sm: "23px" } }}
+          sx={{
+            fontWeight: 800,
+            fontSize: { xs: "15px", sm: "23px" },
+            color: color2,
+          }}
           mt={1}
           variant="h6"
         >

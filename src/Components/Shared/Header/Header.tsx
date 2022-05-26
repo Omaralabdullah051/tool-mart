@@ -27,6 +27,15 @@ export const Header = () => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const handleNavigatePortfolio = () => {
+    setAnchorElNav(null);
+    navigate("/portfolio");
+  };
+
+  const handleNavigateDashboard = () => {
+    setAnchorElNav(null);
     navigate("/dashboard");
   };
 
@@ -44,9 +53,6 @@ export const Header = () => {
     signOut(auth);
     localStorage.removeItem("accessToken");
   };
-
-  const pages = ["Products", "Blog", "Pricing", "Review"];
-  const settings = ["Profile", "Account", "Dashboard"];
 
   const value = useContext(Context);
 
@@ -121,10 +127,24 @@ export const Header = () => {
                     backgroundColor: color2,
                   },
                 }}
-                onClick={handleCloseNavMenu}
+                onClick={handleNavigateDashboard}
               >
                 <Typography textAlign="center" fontWeight={700}>
                   Dashboard
+                </Typography>
+              </MenuItem>
+              <MenuItem
+                sx={{
+                  backgroundColor,
+                  color,
+                  "&:hover": {
+                    backgroundColor: color2,
+                  },
+                }}
+                onClick={handleNavigatePortfolio}
+              >
+                <Typography textAlign="center" fontWeight={700}>
+                  My Portfolio
                 </Typography>
               </MenuItem>
               <FormControlLabel
@@ -165,6 +185,18 @@ export const Header = () => {
             ) : (
               ""
             )}
+            <Button
+              onClick={handleCloseNavMenu}
+              color="inherit"
+              sx={{ my: 2, display: "block", fontWeight: 700 }}
+            >
+              <Link
+                style={{ textDecoration: "none", color: color }}
+                to="/portfolio"
+              >
+                Portfolio
+              </Link>
+            </Button>
             <FormControlLabel
               sx={{ marginLeft: "5px" }}
               label="Dark mode"
@@ -203,21 +235,6 @@ export const Header = () => {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  {settings.map((setting) => (
-                    <MenuItem
-                      sx={{
-                        backgroundColor,
-                        color,
-                        "&:hover": {
-                          backgroundColor: color2,
-                        },
-                      }}
-                      key={setting}
-                      onClick={handleCloseUserMenu}
-                    >
-                      <Typography textAlign="center">{setting}</Typography>
-                    </MenuItem>
-                  ))}
                   <MenuItem
                     sx={{
                       backgroundColor,

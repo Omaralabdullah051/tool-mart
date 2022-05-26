@@ -6,6 +6,7 @@ import {
   TableCell,
   Button,
   Typography,
+  Avatar,
 } from "@mui/material";
 import { signOut } from "firebase/auth";
 import { useContext, useEffect, useState } from "react";
@@ -13,27 +14,22 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
 import auth from "../../firebase.init";
-import { OrderTypes } from "../../Interfaces/Interfaces";
+import { OrderTypes, PartTypes } from "../../Interfaces/Interfaces";
 import CancelButton from "./CancelButton";
 
-export const MyOrders = () => {
+export const ManageProducts = () => {
   const [tableData, setTableData] = useState([]);
-  const [user] = useAuthState(auth);
   const navigate = useNavigate();
   const value = useContext(Context);
-  const userEmail = user?.email;
 
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch(
-          `http://localhost:5000/order/get?email=${userEmail}`,
-          {
-            headers: {
-              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            },
-          }
-        );
+        const res = await fetch("http://localhost:5000/parts", {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        });
         const data = await res.json();
         if (
           data.message === "Forbidden access" ||
@@ -49,7 +45,7 @@ export const MyOrders = () => {
         console.log(err);
       }
     })();
-  }, [userEmail, navigate]);
+  }, [navigate]);
 
   console.log(tableData);
 
@@ -73,8 +69,38 @@ export const MyOrders = () => {
     color3 = "#000";
   }
 
-  const handleNavigate = (id: string) => {
-    navigate(`/payment/${id}`);
+  const handleUpdateStatus = (id: string) => {
+    const status = { status: "Shipped" };
+    (async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/order/put?id=${id}`, {
+          method: "PUT",
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(status),
+        });
+        const data = await res.json();
+        if (
+          data.message === "Forbidden access" ||
+          data.message === "UnAuthorized access"
+        ) {
+          signOut(auth);
+          navigate("/login");
+        }
+        console.log(data);
+        if (data.message === "Success") {
+          const newArray = [];
+          const rest = tableData.filter(
+            (row: OrderTypes<string>) => row._id !== id
+          );
+          setTableData(data.result);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    })();
   };
 
   return (
@@ -88,36 +114,45 @@ export const MyOrders = () => {
                 color: "inherit",
                 fontWeight: 800,
               }}
-            >
-              Customer Name
-            </TableCell>
-            <TableCell
-              sx={{
-                bgcolor: backgroundColor,
-                color: "inherit",
-                fontWeight: 800,
-              }}
-            >
-              Tool Name
-            </TableCell>
-            <TableCell
-              sx={{
-                bgcolor: backgroundColor,
-                color: "inherit",
-                fontWeight: 800,
-              }}
-            >
-              Address
-            </TableCell>
-            <TableCell
-              sx={{
-                bgcolor: backgroundColor,
-                color: "inherit",
-                fontWeight: 800,
-              }}
               align="center"
             >
-              Phone
+              Image
+            </TableCell>
+            <TableCell
+              sx={{
+                bgcolor: backgroundColor,
+                color: "inherit",
+                fontWeight: 800,
+              }}
+            >
+              Product Name
+            </TableCell>
+            <TableCell
+              sx={{
+                bgcolor: backgroundColor,
+                color: "inherit",
+                fontWeight: 800,
+              }}
+            >
+              Product Price
+            </TableCell>
+            <TableCell
+              sx={{
+                bgcolor: backgroundColor,
+                color: "inherit",
+                fontWeight: 800,
+              }}
+            >
+              Minimum Order Quantity
+            </TableCell>
+            <TableCell
+              sx={{
+                bgcolor: backgroundColor,
+                color: "inherit",
+                fontWeight: 800,
+              }}
+            >
+              Available Quantity
             </TableCell>
             <TableCell
               sx={{
@@ -131,34 +166,35 @@ export const MyOrders = () => {
             </TableCell>
           </TableRow>
         </TableHead>
-        {tableData.map((row: OrderTypes<string>) => (
+        {tableData.map((row: PartTypes<string>) => (
           <TableRow
             key={row._id}
             sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
           >
             <TableCell sx={{ color: color2, fontWeight: 800 }}>
+              <Avatar
+                sx={{ width: 50, height: 50, margin: "10px auto" }}
+                src={row.img}
+              />
+            </TableCell>
+            <TableCell sx={{ color: color2, fontWeight: 800 }}>
               {row.name}
             </TableCell>
             <TableCell sx={{ color: color2, fontWeight: 800 }}>
-              {row.toolName}
+              {row.price}
             </TableCell>
             <TableCell sx={{ color: color2, fontWeight: 800 }}>
-              {row.address}
+              {row.minimumOrderQuantity}
+            </TableCell>
+            <TableCell sx={{ color: color2, fontWeight: 800 }}>
+              {row.availableQuantity}
             </TableCell>
             <TableCell sx={{ color: color2, fontWeight: 800 }} align="center">
-              {row.phone}
-            </TableCell>
-            <TableCell sx={{ color: color2, fontWeight: 800 }} align="center">
-              {row.paid ? (
-                <Typography variant="body2">paid</Typography>
-              ) : (
-                <CancelButton
-                  row={row}
-                  setTableData={setTableData}
-                  tableData={tableData}
-                />
-              )}
-              <Button onClick={() => handleNavigate(row._id)}>Payment</Button>
+              <CancelButton
+                row={row}
+                setTableData={setTableData}
+                tableData={tableData}
+              />
             </TableCell>
           </TableRow>
         ))}
