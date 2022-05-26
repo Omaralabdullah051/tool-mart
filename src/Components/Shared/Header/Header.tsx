@@ -42,6 +42,7 @@ export const Header = () => {
   const handleLogOut = () => {
     setAnchorElUser(null);
     signOut(auth);
+    localStorage.removeItem("accessToken");
   };
 
   const pages = ["Products", "Blog", "Pricing", "Review"];
@@ -148,18 +149,22 @@ export const Header = () => {
               display: { xs: "none", md: "flex", justifyContent: "end" },
             }}
           >
-            <Button
-              onClick={handleCloseNavMenu}
-              color="inherit"
-              sx={{ my: 2, display: "block", fontWeight: 700 }}
-            >
-              <Link
-                style={{ textDecoration: "none", color: color }}
-                to="/dashboard"
+            {user ? (
+              <Button
+                onClick={handleCloseNavMenu}
+                color="inherit"
+                sx={{ my: 2, display: "block", fontWeight: 700 }}
               >
-                Dashboard
-              </Link>
-            </Button>
+                <Link
+                  style={{ textDecoration: "none", color: color }}
+                  to="/dashboard"
+                >
+                  Dashboard
+                </Link>
+              </Button>
+            ) : (
+              ""
+            )}
             <FormControlLabel
               sx={{ marginLeft: "5px" }}
               label="Dark mode"

@@ -1,11 +1,13 @@
-import { Box, Grid, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Context } from "../../App";
 import auth from "../../firebase.init";
+import { useToken } from "../../hooks/useToken";
+import { LocationState } from "../../Interfaces/Interfaces";
 
 export const Login = () => {
   const {
@@ -18,6 +20,9 @@ export const Login = () => {
     useSignInWithEmailAndPassword(auth);
   const navigate = useNavigate();
   const value = useContext(Context);
+  const [token] = useToken(user?.user?.email);
+  const location = useLocation();
+  const from = (location.state as LocationState)?.from;
 
   let theme;
   if (value?.checked) theme = "dark";
@@ -40,10 +45,10 @@ export const Login = () => {
   }
 
   useEffect(() => {
-    if (user) {
-      navigate("/");
+    if (token) {
+      navigate(from, { replace: true } || "/");
     }
-  }, [user, navigate]);
+  }, [token, navigate, from]);
 
   const onSubmit = async (data: any) => {
     signInWithEmailAndPassword(data.email, data.password);

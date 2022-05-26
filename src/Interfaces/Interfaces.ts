@@ -55,3 +55,9 @@ export interface RowTypes<T> {
   };
   refetch: () => void;
 }
+
+export interface LocationState {
+  from: {
+    pathname: string;
+  };
+}

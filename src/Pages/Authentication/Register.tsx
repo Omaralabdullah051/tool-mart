@@ -5,16 +5,19 @@ import {
 } from "react-firebase-hooks/auth";
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Context } from "../../App";
 import "./input.css";
 import auth from "../../firebase.init";
 import { toast } from "react-toastify";
+import { useToken } from "../../hooks/useToken";
+import { LocationState } from "../../Interfaces/Interfaces";
 
 export const Register = () => {
   const [createUserWithEmailAndPassword, user, loading, hookError] =
     useCreateUserWithEmailAndPassword(auth);
   const [error, setError] = useState("");
+  const [token] = useToken(user?.user?.email);
   const [updateProfile] = useUpdateProfile(auth);
   const navigate = useNavigate();
   const {
@@ -26,7 +29,7 @@ export const Register = () => {
     mode: "onTouched",
   });
   watch("password", "");
-  const [value, setValue] = useState("");
+
   const value1 = useContext(Context);
 
   let theme;
@@ -50,10 +53,10 @@ export const Register = () => {
   }
 
   useEffect(() => {
-    if (user) {
+    if (token) {
       navigate("/");
     }
-  }, [user, navigate]);
+  }, [token, navigate]);
 
   useEffect(() => {
     if (hookError) {
@@ -93,7 +96,6 @@ export const Register = () => {
     console.log(data);
     await createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({ displayName: data.name, photoURL: data.image });
-    console.log(data);
   };
 
   return (

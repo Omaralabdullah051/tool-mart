@@ -31,8 +31,6 @@ export const MyOrders = () => {
     )
   );
 
-  console.log(tableData);
-
   if (isLoading) {
     return <p>loading...</p>;
   }

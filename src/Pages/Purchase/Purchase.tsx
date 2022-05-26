@@ -58,7 +58,6 @@ export const Purchase = () => {
   const userEmail: any = user?.email;
 
   const onSubmit = (data: any) => {
-    console.log(data);
     const orders = {
       name: userName,
       email: userEmail,

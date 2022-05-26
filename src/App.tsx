@@ -14,6 +14,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Payment } from "./Pages/Dashboard/Payment";
 import { NotFound } from "./Pages/NotFound/NotFound";
+import { RequireAuth } from "./Components/Shared/RequireAuth/RequireAuth";
 
 const queryClient = new QueryClient();
 
@@ -49,7 +50,14 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/purchase/:id" element={<Purchase />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route
+              path="/dashboard"
+              element={
+                <RequireAuth>
+                  <Dashboard />
+                </RequireAuth>
+              }
+            />
             <Route path="/payment/:id" element={<Payment />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
