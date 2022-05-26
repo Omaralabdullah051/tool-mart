@@ -19,7 +19,9 @@ export const Purchase = () => {
   const { id } = useParams();
   const value = useContext(Context);
   const { data, isLoading } = useQuery(["getParts", id], () =>
-    fetch(`http://localhost:5000/getparts/${id}`).then((res) => res.json())
+    fetch(`https://limitless-beach-64664.herokuapp.com/getparts/${id}`).then(
+      (res) => res.json()
+    )
   );
 
   if (isLoading) {
@@ -70,7 +72,7 @@ export const Purchase = () => {
       price: price,
       status: "Unpaid",
     };
-    fetch("http://localhost:5000/order/post", {
+    fetch("https://limitless-beach-64664.herokuapp.com/order/post", {
       method: "POST",
       headers: {
         "Content-type": "application/json",

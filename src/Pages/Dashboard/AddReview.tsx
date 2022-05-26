@@ -54,7 +54,7 @@ export const AddReview = () => {
       img: img,
       rating: value,
     };
-    fetch("http://localhost:5000/review/post", {
+    fetch("https://limitless-beach-64664.herokuapp.com/review/post", {
       method: "POST",
       headers: {
         "Content-type": "application/json",

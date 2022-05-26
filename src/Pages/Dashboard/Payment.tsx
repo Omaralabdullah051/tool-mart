@@ -10,9 +10,9 @@ export const Payment = () => {
   const value = useContext(Context);
 
   const { data, isLoading } = useQuery(["getOrders", id], () =>
-    fetch(`http://localhost:5000/order/getorders/${id}`).then((res) =>
-      res.json()
-    )
+    fetch(
+      `https://limitless-beach-64664.herokuapp.com/order/getorders/${id}`
+    ).then((res) => res.json())
   );
 
   if (isLoading) {

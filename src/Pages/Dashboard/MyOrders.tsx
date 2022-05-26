@@ -27,7 +27,7 @@ export const MyOrders = () => {
     (async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/order/get?email=${userEmail}`,
+          `https://limitless-beach-64664.herokuapp.com/order/get?email=${userEmail}`,
           {
             headers: {
               authorization: `Bearer ${localStorage.getItem("accessToken")}`,

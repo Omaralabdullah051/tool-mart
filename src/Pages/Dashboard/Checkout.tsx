@@ -20,14 +20,17 @@ export const Checkout = ({ price, id }: PriceProps) => {
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/order/create-payment-intent", {
-      method: "POST",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({ price }),
-    })
+    fetch(
+      "https://limitless-beach-64664.herokuapp.com/order/create-payment-intent",
+      {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ price }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -89,14 +92,17 @@ export const Checkout = ({ price, id }: PriceProps) => {
       const payment = {
         transactionId: paymentIntent.id,
       };
-      fetch(`http://localhost:5000/order/putagain/${id}`, {
-        method: "PUT",
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(payment),
-      })
+      fetch(
+        `https://limitless-beach-64664.herokuapp.com/order/putagain/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(payment),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           setProcessing(false);

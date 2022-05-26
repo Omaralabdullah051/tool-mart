@@ -27,7 +27,7 @@ export const MakeAdmin = () => {
     isLoading,
     refetch,
   } = useQuery("getallusers", () =>
-    fetch(`http://localhost:5000/user/getall`, {
+    fetch(`https://limitless-beach-64664.herokuapp.com/user/getall`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         "Content-type": "application/json",
@@ -63,14 +63,17 @@ export const MakeAdmin = () => {
     const status = { role: "admin" };
     (async () => {
       try {
-        const res = await fetch(`http://localhost:5000/user/put/${email}`, {
-          method: "PUT",
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify(status),
-        });
+        const res = await fetch(
+          `https://limitless-beach-64664.herokuapp.com/user/put/${email}`,
+          {
+            method: "PUT",
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify(status),
+          }
+        );
         const data = await res.json();
         if (
           data.message === "Forbidden access" ||

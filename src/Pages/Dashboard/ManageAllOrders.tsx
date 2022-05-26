@@ -26,11 +26,14 @@ export const ManageAllOrders = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch(`http://localhost:5000/order/getall`, {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        });
+        const res = await fetch(
+          `https://limitless-beach-64664.herokuapp.com/order/getall`,
+          {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }
+        );
         const data = await res.json();
         if (
           data.message === "Forbidden access" ||
@@ -74,14 +77,17 @@ export const ManageAllOrders = () => {
     const status = { status: "Shipped" };
     (async () => {
       try {
-        const res = await fetch(`http://localhost:5000/order/put?id=${id}`, {
-          method: "PUT",
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify(status),
-        });
+        const res = await fetch(
+          `https://limitless-beach-64664.herokuapp.com/order/put?id=${id}`,
+          {
+            method: "PUT",
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify(status),
+          }
+        );
         const data = await res.json();
         if (
           data.message === "Forbidden access" ||

@@ -36,7 +36,7 @@ const DeleteButton = ({ row, setTableData, tableData }: RowTypes<string>) => {
   }
 
   const handleAgreeButton = (id: string) => {
-    fetch(`http://localhost:5000/deletepart/${id}`, {
+    fetch(`https://limitless-beach-64664.herokuapp.com/deletepart/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

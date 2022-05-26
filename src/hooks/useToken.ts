@@ -13,7 +13,7 @@ export const useToken = (user: any) => {
       name,
     };
     if (email) {
-      fetch(`http://localhost:5000/user/add/${email}`, {
+      fetch(`https://limitless-beach-64664.herokuapp.com/user/add/${email}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",

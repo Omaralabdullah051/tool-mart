@@ -58,7 +58,7 @@ export const AddProduct = () => {
       availableQuantity: data.availableQuantity,
       price: data.price,
     };
-    fetch("http://localhost:5000/postpart", {
+    fetch("https://limitless-beach-64664.herokuapp.com/postpart", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
