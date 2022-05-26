@@ -19,7 +19,7 @@ export const Payment = () => {
     return <p>...loading</p>;
   }
 
-  const { name, img, price, quantity, toolName } = data.result[0];
+  const { _id, name, img, price, quantity, toolName } = data.result[0];
 
   const totalPrice = price * quantity;
 
@@ -110,7 +110,7 @@ export const Payment = () => {
             >
               Contact Us: omaralabdullah051@gmail.com
             </Typography>
-            <PaymentBox price={totalPrice} />
+            <PaymentBox price={totalPrice} id={_id} />
           </Box>
         </Grid>
       </Grid>

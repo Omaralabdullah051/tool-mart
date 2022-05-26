@@ -92,10 +92,6 @@ export const ManageAllOrders = () => {
         }
         console.log(data);
         if (data.message === "Success") {
-          const newArray = [];
-          const rest = tableData.filter(
-            (row: OrderTypes<string>) => row._id !== id
-          );
           setTableData(data.result);
         }
       } catch (err) {
@@ -205,16 +201,21 @@ export const ManageAllOrders = () => {
               )}
             </TableCell>
             <TableCell sx={{ color: color2, fontWeight: 800 }} align="center">
-              {row.paid ? (
+              {row.status === "pending" ? (
                 <Button onClick={() => handleUpdateStatus(row._id)}>
                   Update Status
                 </Button>
               ) : (
+                ""
+              )}
+              {!row.paid ? (
                 <CancelButton
                   row={row}
                   setTableData={setTableData}
                   tableData={tableData}
                 />
+              ) : (
+                ""
               )}
             </TableCell>
           </TableRow>

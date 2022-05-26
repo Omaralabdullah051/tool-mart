@@ -43,6 +43,7 @@ export interface OrderTypes<T> {
   quantity: number;
   paid?: boolean;
   status?: T;
+  transactionId?: T;
 }
 
 export interface RowTypes<T> {

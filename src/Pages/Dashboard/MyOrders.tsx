@@ -150,7 +150,12 @@ export const MyOrders = () => {
             </TableCell>
             <TableCell sx={{ color: color2, fontWeight: 800 }} align="center">
               {row.paid ? (
-                <Typography variant="body2">paid</Typography>
+                <Typography
+                  variant="body2"
+                  sx={{ color: "green", fontWeight: 800 }}
+                >
+                  Paid
+                </Typography>
               ) : (
                 <CancelButton
                   row={row}
@@ -158,7 +163,18 @@ export const MyOrders = () => {
                   tableData={tableData}
                 />
               )}
-              <Button onClick={() => handleNavigate(row._id)}>Payment</Button>
+              {!row.paid ? (
+                <Button onClick={() => handleNavigate(row._id)}>Payment</Button>
+              ) : (
+                <>
+                  <Typography sx={{ fontWeight: 800 }} variant="body2">
+                    {row.status}
+                  </Typography>
+                  <Typography sx={{ fontWeight: 800 }} variant="body2">
+                    Transaction Id: {row.transactionId}
+                  </Typography>
+                </>
+              )}
             </TableCell>
           </TableRow>
         ))}
