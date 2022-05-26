@@ -2,6 +2,8 @@ import { Stack } from "@mui/material";
 import { Banner } from "./Banner";
 import { BusinessSummary } from "./BusinessSummary";
 import { Parts } from "./Parts";
+import { Review } from "./Review";
+import { TimeLine } from "./TimeLine";
 
 export const Home = () => {
   return (
@@ -9,6 +11,8 @@ export const Home = () => {
       <Banner />
       <Parts />
       <BusinessSummary />
+      <Review />
+      <TimeLine />
     </Stack>
   );
 };

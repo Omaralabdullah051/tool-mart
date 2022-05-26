@@ -44,6 +44,9 @@ export interface OrderTypes<T> {
   paid?: boolean;
   status?: T;
   transactionId?: T;
+  comment?: T;
+  img?: T;
+  rating?: number;
 }
 
 export interface RowTypes<T> {
