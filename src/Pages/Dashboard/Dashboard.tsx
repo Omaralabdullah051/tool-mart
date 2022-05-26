@@ -10,6 +10,8 @@ import { MyProfile } from "./MyProfile";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import useAdmin from "../../hooks/useAdmin";
+import { ManageAllOrders } from "./ManageAllOrders";
+import { AddProduct } from "./AddProduct";
 
 export const Dashboard = () => {
   const [user] = useAuthState(auth);
@@ -56,18 +58,31 @@ export const Dashboard = () => {
             )}
           </TabList>
         </Box>
-        <TabPanel value="1">
-          <MyOrders />
-        </TabPanel>
-        <TabPanel value="2">
-          <AddReview />
-        </TabPanel>
-        <TabPanel value="3">
-          <MyProfile />
-        </TabPanel>
-        <TabPanel value="4">
-          <MyProfile />
-        </TabPanel>
+        {!admin ? (
+          <Box>
+            <TabPanel value="1">
+              <MyOrders />
+            </TabPanel>
+            <TabPanel value="2">
+              <AddReview />
+            </TabPanel>
+            <TabPanel value="3">
+              <MyProfile />
+            </TabPanel>
+          </Box>
+        ) : (
+          <Box>
+            <TabPanel value="1">
+              <ManageAllOrders />
+            </TabPanel>
+            <TabPanel value="2">
+              <AddProduct />
+            </TabPanel>
+            <TabPanel value="3">
+              <MyProfile />
+            </TabPanel>
+          </Box>
+        )}
       </TabContext>
     </Box>
   );

@@ -68,6 +68,7 @@ export const Purchase = () => {
       paid: false,
       img: img,
       price: price,
+      status: "Unpaid",
     };
     fetch("http://localhost:5000/order/post", {
       method: "POST",

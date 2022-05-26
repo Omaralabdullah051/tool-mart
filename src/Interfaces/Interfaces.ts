@@ -40,6 +40,7 @@ export interface OrderTypes<T> {
   toolName: T;
   quantity: number;
   paid?: boolean;
+  status?: T;
 }
 
 export interface RowTypes<T> {
@@ -52,6 +53,7 @@ export interface RowTypes<T> {
     toolName: T;
     quantity: number;
     paid?: boolean;
+    status?: T;
   };
   tableData: OrderTypes<T>[];
   setTableData: any;
