@@ -22,7 +22,7 @@ export const Login = () => {
   const value = useContext(Context);
   const [token] = useToken(user?.user?.email);
   const location = useLocation();
-  const from = (location.state as LocationState)?.from;
+  const from = (location.state as LocationState)?.from || "/";
 
   let theme;
   if (value?.checked) theme = "dark";
@@ -46,7 +46,7 @@ export const Login = () => {
 
   useEffect(() => {
     if (token) {
-      navigate(from, { replace: true } || "/");
+      navigate(from, { replace: true });
     }
   }, [token, navigate, from]);
 

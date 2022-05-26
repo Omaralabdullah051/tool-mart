@@ -53,7 +53,8 @@ export interface RowTypes<T> {
     quantity: number;
     paid?: boolean;
   };
-  refetch: () => void;
+  tableData: OrderTypes<T>[];
+  setTableData: any;
 }
 
 export interface LocationState {

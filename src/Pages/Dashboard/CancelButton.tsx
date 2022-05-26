@@ -9,9 +9,9 @@ import {
 import { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { Context } from "../../App";
-import { RowTypes } from "../../Interfaces/Interfaces";
+import { OrderTypes, RowTypes } from "../../Interfaces/Interfaces";
 
-const CancelButton = ({ row, refetch }: RowTypes<string>) => {
+const CancelButton = ({ row, setTableData, tableData }: RowTypes<string>) => {
   const [open, setOpen] = useState(false);
   const value = useContext(Context);
 
@@ -43,7 +43,10 @@ const CancelButton = ({ row, refetch }: RowTypes<string>) => {
       .then((data) => {
         if (data.message) toast.success(data.message);
         if (data.error) toast.error(data.error);
-        refetch();
+        const rest = tableData.filter(
+          (row: OrderTypes<string>) => row._id !== id
+        );
+        setTableData(rest);
         setOpen(false);
       });
   };
