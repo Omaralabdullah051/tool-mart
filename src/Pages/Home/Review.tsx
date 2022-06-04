@@ -27,14 +27,16 @@ export const Review = () => {
     color3 = "#000";
   }
   const { data: reviews, isLoading } = useQuery("getReviews", () =>
-    fetch(`http://localhost:5000/review/get`).then((res) => res.json())
+    fetch(`https://limitless-beach-64664.herokuapp.com/review/get`).then(
+      (res) => res.json()
+    )
   );
 
   if (isLoading) {
     return <p>...loading</p>;
   }
   return (
-    <Box sx={{ margin: "0px 20px" }}>
+    <Box>
       <Typography
         sx={{ color, fontWeight: 800 }}
         mt={12}
@@ -44,16 +46,15 @@ export const Review = () => {
       >
         Reviews
       </Typography>
-      <Grid
-        container
-        columnSpacing={1}
-        sx={{ backgroundColor, borderRadius: "5px", padding: "50px" }}
-      >
+      <Grid container columnSpacing={1}>
         {reviews.result.map((review: OrderTypes<string>) => (
           <Grid
+            key={review._id}
+            mx="auto"
             sx={{
-              padding: "10px",
+              backgroundColor,
               textAlign: "center",
+              borderRadius: "10px",
             }}
             item
             xs={12}
@@ -65,11 +66,22 @@ export const Review = () => {
                 sx={{ width: 105, height: 105, margin: "5px auto" }}
                 src={review.img}
               />
-              <Typography sx={{ color, fontWeight: 800 }} variant="h6">
+              <Typography
+                sx={{
+                  color,
+                  fontWeight: 800,
+                  fontSize: { xs: "13px", sm: "20px" },
+                }}
+                variant="h6"
+              >
                 {review.name}
               </Typography>
               <Typography
-                sx={{ color: color2, fontWeight: 800 }}
+                sx={{
+                  color: color2,
+                  fontWeight: 800,
+                  fontSize: { xs: "13px", sm: "20px" },
+                }}
                 variant="body1"
               >
                 {review.email}
