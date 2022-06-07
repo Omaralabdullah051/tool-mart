@@ -27,8 +27,14 @@ export const Banner = () => {
   }
 
   return (
-    <Box sx={{ margin: "20px", backgroundColor, borderRadius: "10px" }}>
-      <Grid container my={4} px={4} rowSpacing={2} columnSpacing={4}>
+    <Box
+      sx={{
+        margin: { xs: "12px", sm: "20px" },
+        backgroundColor,
+        borderRadius: "10px",
+      }}
+    >
+      <Grid container my={4} px={2} rowSpacing={2} columnSpacing={4}>
         <Grid item xs={12} sm={6}>
           <Box p={2}>
             <Typography
@@ -41,11 +47,19 @@ export const Banner = () => {
             >
               Perfect Management
             </Typography>
-            <Typography sx={{ fontWeight: 800, color }} variant="h4">
+            <Typography
+              sx={{
+                fontSize: { xs: "18px", md: "25px" },
+                fontWeight: 800,
+                color,
+              }}
+              variant="h4"
+            >
               All that You need
             </Typography>
             <Typography
               sx={{
+                fontSize: { xs: "10px", md: "13px", lg: "18px" },
                 fontWeight: 700,
                 marginTop: "10px",
                 textAlign: "justify",
@@ -65,7 +79,10 @@ export const Banner = () => {
             </Typography>
             <Button
               variant="contained"
+              size="small"
               sx={{
+                marginTop: "5px",
+                fontSize: { xs: "10px", md: "13px" },
                 backgroundColor: color,
                 "&:hover": {
                   backgroundColor: color2,
@@ -80,8 +97,17 @@ export const Banner = () => {
           <Box p={2} sx={{ display: { xs: "none", lg: "block" } }}>
             <img width="600px" src={image} alt="Breakfast" loading="lazy" />
           </Box>
-          <Box p={2} sx={{ display: { xs: "block", sm: "none" } }}>
-            <img width="200px" src={image} alt="Breakfast" loading="lazy" />
+          <Box
+            p={2}
+            sx={{ display: { xs: "block", sm: "none", margin: "0 auto" } }}
+          >
+            <img
+              style={{ margin: "0 auto", display: "block" }}
+              width="200px"
+              src={image}
+              alt="Breakfast"
+              loading="lazy"
+            />
           </Box>
           <Box p={2} sx={{ display: { xs: "none", sm: "block", md: "none" } }}>
             <img width="300px" src={image} alt="Breakfast" loading="lazy" />

@@ -12,7 +12,7 @@ export const Home = () => {
       <Banner />
       <Parts />
       <BusinessSummary />
-      <Review />
+      {/* <Review /> */}
       <TimeLine />
       <AboutSection />
     </Stack>

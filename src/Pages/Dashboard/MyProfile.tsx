@@ -32,8 +32,9 @@ export const MyProfile = () => {
     <Box
       sx={{
         bgcolor: backgroundColor,
-        padding: "50px",
-        margin: "20px",
+        // padding: "50px",
+        // margin: "20px",
+        padding: "20px",
         borderRadius: "5px",
       }}
     >
@@ -56,7 +57,7 @@ export const MyProfile = () => {
           mx="auto"
           sx={{
             fontWeight: 800,
-            fontSize: { xs: "15px", sm: "23px" },
+            fontSize: { xs: "10px", sm: "23px" },
             color: color2,
           }}
           mt={1}

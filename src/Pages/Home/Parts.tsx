@@ -20,11 +20,11 @@ export const Parts = () => {
         variant="h3"
         textAlign="center"
         mt={8}
-        sx={{ fontWeight: 800 }}
+        sx={{ fontWeight: 800, fontSize: { xs: "28px", md: "40px" } }}
       >
         Tools & Parts
       </Typography>
-      <Grid container px={1} columnSpacing={1}>
+      <Grid container px={1} columnSpacing={1} mb={15}>
         {data.result.map((part: PartTypes<string>) => (
           <Part key={part._id} part={part} />
         ))}

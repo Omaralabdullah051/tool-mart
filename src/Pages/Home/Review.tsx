@@ -36,9 +36,13 @@ export const Review = () => {
     return <p>...loading</p>;
   }
   return (
-    <Box>
+    <Box mx={2}>
       <Typography
-        sx={{ color, fontWeight: 800 }}
+        sx={{
+          color,
+          fontWeight: 800,
+          fontSize: { xs: "28px", lg: "45px" },
+        }}
         mt={12}
         mb={8}
         textAlign="center"
@@ -53,15 +57,13 @@ export const Review = () => {
             mx="auto"
             sx={{
               backgroundColor,
-              textAlign: "center",
               borderRadius: "10px",
             }}
             item
             xs={12}
-            sm={12}
             md={4}
           >
-            <Box>
+            <Box sx={{ textAlign: "center" }}>
               <Avatar
                 sx={{ width: 105, height: 105, margin: "5px auto" }}
                 src={review.img}

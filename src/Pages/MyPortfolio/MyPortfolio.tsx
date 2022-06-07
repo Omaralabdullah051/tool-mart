@@ -29,8 +29,8 @@ export const MyPortfolio = () => {
     <Box
       sx={{
         bgcolor: backgroundColor,
-        padding: "50px",
-        margin: "20px",
+        margin: { xs: "12px", sm: "20px" },
+        padding: "20px",
         borderRadius: "5px",
       }}
     >
@@ -57,7 +57,7 @@ export const MyPortfolio = () => {
           mx="auto"
           sx={{
             fontWeight: 800,
-            fontSize: { xs: "15px", sm: "23px" },
+            fontSize: { xs: "10px", sm: "23px" },
             color: color2,
           }}
           mt={1}
@@ -69,7 +69,7 @@ export const MyPortfolio = () => {
           mx="auto"
           sx={{
             fontWeight: 800,
-            fontSize: { xs: "15px", sm: "23px" },
+            fontSize: { xs: "10px", sm: "23px" },
             color: color2,
           }}
           mt={1}
@@ -81,7 +81,7 @@ export const MyPortfolio = () => {
           mx="auto"
           sx={{
             fontWeight: 800,
-            fontSize: { xs: "10px", sm: "20px" },
+            fontSize: { xs: "8px", sm: "20px" },
             color: color2,
           }}
           mt={1}
@@ -93,7 +93,7 @@ export const MyPortfolio = () => {
           mx="auto"
           sx={{
             fontWeight: 800,
-            fontSize: { xs: "13px", sm: "20px" },
+            fontSize: { xs: "12px", sm: "23px" },
             color: color,
           }}
           mt={1}
@@ -103,7 +103,11 @@ export const MyPortfolio = () => {
         </Typography>
         <Box mx="auto">
           <Link
-            sx={{ textDecoration: "none" }}
+            sx={{
+              textDecoration: "none",
+              fontSize: "14px",
+              fontWeight: 700,
+            }}
             mx="auto"
             href="https://book-mart-94d39.web.app/"
             target="blank"
@@ -113,7 +117,7 @@ export const MyPortfolio = () => {
         </Box>
         <Box mx="auto">
           <Link
-            sx={{ textDecoration: "none" }}
+            sx={{ textDecoration: "none", fontSize: "14px", fontWeight: 700 }}
             mx="auto"
             href="https://independent-service-prov-44bc0.web.app/"
             target="blank"
@@ -123,7 +127,7 @@ export const MyPortfolio = () => {
         </Box>
         <Box mx="auto">
           <Link
-            sx={{ textDecoration: "none" }}
+            sx={{ textDecoration: "none", fontSize: "14px", fontWeight: 700 }}
             mx="auto"
             href="https://laptop-analysis-website.netlify.app/"
             target="blank"

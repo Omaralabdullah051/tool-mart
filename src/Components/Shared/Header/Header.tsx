@@ -126,7 +126,6 @@ export const Header = () => {
             >
               <MenuItem
                 sx={{
-                  backgroundColor,
                   color,
                   "&:hover": {
                     backgroundColor: color2,
@@ -141,7 +140,6 @@ export const Header = () => {
               {user ? (
                 <MenuItem
                   sx={{
-                    backgroundColor,
                     color,
                     "&:hover": {
                       backgroundColor: color2,
@@ -158,7 +156,6 @@ export const Header = () => {
               )}
               <MenuItem
                 sx={{
-                  backgroundColor,
                   color,
                   "&:hover": {
                     backgroundColor: color2,
@@ -171,7 +168,7 @@ export const Header = () => {
                 </Typography>
               </MenuItem>
               <FormControlLabel
-                sx={{ marginLeft: "5px", backgroundColor, color }}
+                sx={{ marginLeft: "5px", color }}
                 label="Dark mode"
                 control={
                   <Switch
@@ -272,7 +269,6 @@ export const Header = () => {
                 >
                   <MenuItem
                     sx={{
-                      backgroundColor,
                       color,
                       "&:hover": {
                         backgroundColor: color2,
@@ -280,7 +276,9 @@ export const Header = () => {
                     }}
                     onClick={handleLogOut}
                   >
-                    <Typography textAlign="center">Log out</Typography>
+                    <Typography sx={{ fontWeight: 700 }} textAlign="center">
+                      Log out
+                    </Typography>
                   </MenuItem>
                 </Menu>
               </>

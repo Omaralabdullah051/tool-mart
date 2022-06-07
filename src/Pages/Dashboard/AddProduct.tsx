@@ -81,7 +81,10 @@ export const AddProduct = () => {
         <Typography
           variant="h4"
           textAlign="center"
-          sx={{ fontWeight: 800 }}
+          sx={{
+            fontWeight: 800,
+            fontSize: { xs: "18px", md: "30px", lg: "40px" },
+          }}
           mb={3}
         >
           Add Product

@@ -43,16 +43,12 @@ export const Part = ({ part }: PartProps<string>) => {
   };
 
   return (
-    <Grid item xs={12} sm={6} md={4}>
-      <Box m={10}>
+    <Grid item xs={12} sm={6} lg={4}>
+      <Box my={4} mx={4}>
         <Card
           sx={{
             bgcolor: backgroundColor,
             color: color2,
-            "&:hover": {
-              bgcolor: color,
-              color: color3,
-            },
           }}
         >
           <CardMedia
@@ -63,7 +59,7 @@ export const Part = ({ part }: PartProps<string>) => {
           />
           <CardContent>
             <Typography
-              sx={{ fontWeight: 800 }}
+              sx={{ fontWeight: 800, fontSize: { xs: "18px", md: "25px" } }}
               gutterBottom
               variant="h5"
               component="div"
@@ -85,14 +81,14 @@ export const Part = ({ part }: PartProps<string>) => {
               Available Quantity: {availableQuantity}
             </Typography>
             <Typography
-              sx={{ fontWeight: 800 }}
+              sx={{ fontWeight: 800, fontSize: { xs: "18px", md: "25px" } }}
               variant="h6"
               color="text-secondary"
             >
               Price: {price}
             </Typography>
             <Typography
-              sx={{ fontWeight: 800 }}
+              sx={{ fontWeight: 800, fontSize: { xs: "10px", md: "15px" } }}
               variant="body2"
               color="text-secondary"
             >
